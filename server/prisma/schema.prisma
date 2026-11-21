@@ -1,0 +1,157 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Member {
+  id            String   @id @default(cuid())
+  pcNumber      String   @unique
+  phone         String   @unique
+  email         String?
+  name          String
+  pathway       String
+  location      String
+  status        String
+  identityNumber String?
+  photoPath      String?   @default("TENTATIVE")
+  pinHash       String
+  resetToken    String?
+  isReviewer    Boolean  @default(false)
+  isAdmin       Boolean  @default(false)
+  resetExpires  DateTime?
+  assistedBy    String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  endorsements   Endorsement[]
+  auditAsActor   AuditLog[]    @relation("AuditActor")
+  reviewsReceived ReviewDecision[] @relation("ReviewTarget")
+  reviewsMade     ReviewDecision[] @relation("ReviewAuthor")
+  auditAsTarget  AuditLog[]    @relation("AuditTarget")
+
+  @@index([status])
+}
+
+model Endorsement {
+  id         String   @id @default(cuid())
+  memberId   String?
+  name       String
+  phone      String?
+  assistedBy String?
+  createdAt  DateTime @default(now())
+
+  member Member? @relation(fields: [memberId], references: [id])
+
+  @@index([assistedBy])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  actorPc   String
+  targetPc  String?
+  meta      String?
+  createdAt DateTime @default(now())
+
+  actor  Member? @relation("AuditActor",  fields: [actorPc],  references: [pcNumber])
+  target Member? @relation("AuditTarget", fields: [targetPc], references: [pcNumber])
+
+  @@index([action])
+  @@index([actorPc])
+}
+
+model PatrioticOfficer {
+  id       String @id @default(cuid())
+  poNumber String @unique
+  name     String
+  role     String
+  location String
+  status   String
+  identityNumber String?
+  photoPath      String? @default("ACTIVE")
+}
+
+model ReviewDecision {
+  id          String   @id @default(cuid())
+  memberId    String
+  reviewerId  String
+  decision    String
+  reason      String?
+  createdAt   DateTime @default(now())
+
+  member   Member @relation("ReviewTarget", fields: [memberId],   references: [id])
+  reviewer Member @relation("ReviewAuthor", fields: [reviewerId], references: [id])
+
+  @@index([memberId])
+  @@index([reviewerId])
+}
+
+
+
+model CorruptionReport {
+  id           String   @id @default(cuid())
+  trackingCode String   @unique
+  category     String
+  description  String
+  location     String
+  reporterName String?
+  reporterPhone String?
+  isAnonymous  Boolean  @default(false)
+  evidenceNote String?
+  evidencePath String?
+  status       String   @default("RECEIVED")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([status])
+  @@index([trackingCode])
+}
+
+
+
+
+
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  location    String
+  startAt     DateTime
+  endAt       DateTime?
+  createdById String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  rsvps EventRSVP[]
+
+  @@index([startAt])
+}
+
+model EventRSVP {
+  id         String   @id @default(cuid())
+  eventId    String
+  memberId   String?
+  name       String
+  phone      String
+  createdAt  DateTime @default(now())
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, phone])
+  @@index([eventId])
+}
+
+model PushSubscription {
+  id         String   @id @default(cuid())
+  endpoint   String   @unique
+  keys       String
+  memberId   String
+  createdAt  DateTime @default(now())
+
+  @@index([memberId])
+}

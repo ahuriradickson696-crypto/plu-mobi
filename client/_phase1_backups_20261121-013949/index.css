@@ -1,0 +1,27 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+html, body, #root { height: 100%; }
+body { @apply bg-plu-gray text-plu-black font-sans antialiased; }
+
+.badge { @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium; }
+
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Accessibility: focus rings visible */
+*:focus-visible {
+  outline: 3px solid #FFD400;
+  outline-offset: 2px;
+}
+
+/* Accessibility: ensure links are not just color */
+a { text-decoration: underline; text-underline-offset: 2px; }
+a.no-underline { text-decoration: none; }

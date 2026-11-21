@@ -1,0 +1,68 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+html, body, #root { height: 100%; }
+body { @apply bg-plu-gray text-plu-black font-sans antialiased; }
+
+.badge { @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium; }
+
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Accessibility: focus rings visible */
+*:focus-visible {
+  outline: 3px solid #FFD400;
+  outline-offset: 2px;
+}
+
+/* Accessibility: ensure links are not just color */
+a { text-decoration: underline; text-underline-offset: 2px; }
+a.no-underline { text-decoration: none; }
+
+/* ---------- Phase 1: accessibility globals ---------- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 9999;
+  background: #111;
+  color: #FFD100;
+  padding: 0.75rem 1rem;
+  border-radius: 0 0 0.5rem 0;
+  font-weight: 700;
+  text-decoration: none;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  left: 0;
+  outline: 3px solid #FFD100;
+  outline-offset: 2px;
+}
+
+/* Consistent visible focus for keyboard users everywhere */
+:where(a, button, [role="button"], input, select, textarea, summary):focus-visible {
+  outline: 3px solid #FFD100;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Respect users who ask OS to reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Main landmark focus target (route change focus) */
+#main-content:focus {
+  outline: none;
+}

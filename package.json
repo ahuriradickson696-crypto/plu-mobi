@@ -1,0 +1,15 @@
+{
+  "name": "plu-mobi",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PLU Mobi — Open Participation Model prototype",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\"",
+    "db:push": "npm run db:push --prefix server",
+    "db:seed": "npm run db:seed --prefix server",
+    "db:studio": "npm run db:studio --prefix server"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.7"
+  }
+}
