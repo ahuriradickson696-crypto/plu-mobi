@@ -41,3 +41,9 @@ Thumbs.db
 *.bak.*
 _phase*_backups/
 _logo_everywhere_*/
+
+# SQLite database files (do not commit)
+*.db
+*.sqlite
+*.sqlite3
+server/prisma/dev.db
