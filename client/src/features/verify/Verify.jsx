@@ -1,6 +1,7 @@
-﻿import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import api from "../../api/client";
+import { classifyError } from "../../lib/net";
 import { Button, Field, Input, Alert, Spinner, EmptyState } from "../../ui";
 import StatusBadge from "../../components/StatusBadge";
 
@@ -35,7 +36,7 @@ export default function Verify() {
         setResult(data);
       }
     } catch {
-      setError("Lookup failed. Check the number and try again.");
+      setError(classifyError(err));
     } finally {
       setLoading(false);
     }

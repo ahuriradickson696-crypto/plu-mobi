@@ -1,9 +1,10 @@
-﻿import { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../../api/client";
 import { Button, Field, Input, Alert } from "../../ui";
 import { useAuth } from "../../store/auth";
 import { notify } from "../../lib/notify";
+import { isOnline, classifyError } from "../../lib/net";
 
 export default function Login() {
   const nav = useNavigate();
@@ -40,13 +41,9 @@ export default function Login() {
       notify("Signed in", `Welcome back, ${data.member.name}.`);
       nav("/dashboard");
     } catch (err) {
-      const isNetworkError =
-        !err.response || err.code === "ERR_NETWORK" || err.message?.includes("Network Error");
-      if (isNetworkError) {
-        setError("You are offline. Sign-in requires internet. Please reconnect and try again.");
-      } else {
-        setError(err.response?.data?.error || "Login failed. Check your details and try again.");
-      }
+      // Only say "offline" if the browser truly has no network.
+      // Otherwise, it is a server / cold-start issue.
+      setError(classifyError(err));
     } finally {
       setSubmitting(false);
     }

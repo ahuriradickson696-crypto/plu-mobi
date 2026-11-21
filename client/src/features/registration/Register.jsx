@@ -1,10 +1,11 @@
-﻿import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../../api/client";
 import { Button, Field, Input, Alert } from "../../ui";
 import { useAuth } from "../../store/auth";
 import { DISTRICTS, NOT_LISTED } from "../../data/locations";
 import { notify } from "../../lib/notify";
+import { isOnline, classifyError } from "../../lib/net";
 import { queueRequest } from "../../lib/offlineQueue";
 
 const DRAFT_KEY = "plu_reg_draft_v2";
@@ -179,7 +180,7 @@ export default function Register() {
         clearDraft();
       } else {
         const resp = e.response?.data || {};
-        setError(resp.error || "Registration failed. Please try again.");
+        setError(classifyError(e));
         if (Array.isArray(resp.details)) {
           setFieldErrors((prev) => ({ ...prev, __details: resp.details }));
           const first = resp.details[0]?.path?.[0];

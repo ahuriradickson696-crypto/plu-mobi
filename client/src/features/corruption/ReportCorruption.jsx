@@ -1,10 +1,11 @@
-﻿import { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/client";
 import {
   Button, Field, Input, Textarea, Alert, Card,
 } from "../../ui";
 import { notify } from "../../lib/notify";
+import { classifyError } from "../../lib/net";
 
 const CATEGORIES = [
   { value: "BRIBERY",         label: "Bribery" },
@@ -94,7 +95,7 @@ export default function ReportCorruption() {
       setSuccess(data);
       notify("Report submitted", "A reviewer will look at this. Keep your tracking code safe.");
     } catch (err) {
-      setError(err.response?.data?.error || "Submission failed. Please try again.");
+      setError(classifyError(err));
     } finally {
       setSending(false);
     }
