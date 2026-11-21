@@ -1,4 +1,4 @@
-﻿import { Routes, Route, Link, useParams } from "react-router-dom";
+import { Routes, Route, Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Login from "./features/auth/Login";
 import Register from "./features/registration/Register";
@@ -28,6 +28,7 @@ import AdminHome from "./features/admin/AdminHome";
 import AdminUsers from "./features/admin/AdminUsers";
 import Header from "./components/Header";
 import SWUpdateBanner from "./components/SWUpdateBanner";
+import InstallPrompt from "./components/InstallPrompt";
 import Stats from "./features/public/Stats";
 import Carousel from "./components/Carousel";
 import { getQueueSize, flushQueue } from "./lib/offlineQueue";
