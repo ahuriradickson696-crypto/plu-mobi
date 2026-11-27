@@ -189,7 +189,7 @@ export default function App() {
         {/* Brand */}
         <div className="text-center">
           <p className="text-plu-yellow font-extrabold text-lg leading-tight">Patriotic League of Uganda</p>
-          <p className="text-xs text-white/60 mt-1">PLU Mobi Â· Official App</p>
+          <p className="text-xs text-white/60 mt-1">PLU Mobi · Official App</p>
         </div>
 
         {/* Compact nav grid - 2 columns of app essentials */}
@@ -226,8 +226,8 @@ export default function App() {
         <div className="text-center text-xs text-white/50 space-y-1 border-t border-white/10 pt-4">
           <p>Plot 7 Saddler Lane, Naguru, Kampala, Uganda</p>
           <p>Tel: 0414675689</p>
-          <p>Â© 2026 Patriotic League of Uganda</p>
-          <p className="text-white/30">PLU Mobi v1.0.0 Â· Prototype</p>
+          <p>© 2026 Patriotic League of Uganda</p>
+          <p className="text-white/30"></p>
         </div>
       </div>
     </footer>
