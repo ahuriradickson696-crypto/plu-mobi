@@ -1,4 +1,4 @@
-﻿import { defineConfig } from "vite";
+import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
@@ -22,6 +22,7 @@ export default defineConfig({
         ],
       },
       workbox: {
+      maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         importScripts: ["/sw-push.js"],
         globPatterns: ["**/*.{js,css,html,svg,png,jpg,webp}"],
         navigateFallback: "/index.html",
