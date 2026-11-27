@@ -1,0 +1,46 @@
+﻿:root {
+  --plu-yellow-50:  #FFFBEB;
+  --plu-yellow-500: #F5C518;
+  --plu-yellow-600: #D9A800;
+  --plu-yellow-900: #5C4500;
+  --status-success: #0F7B3E;
+  --status-warning: #B45309;
+  --status-danger:  #B91C1C;
+  --status-info:    #1E40AF;
+  --status-neutral: #4B5563;
+  --surface-base:   #FFFFFF;
+  --surface-raised: #F9FAFB;
+  --surface-sunken: #F3F4F6;
+  --text-primary:   #111827;
+  --text-secondary: #4B5563;
+  --text-inverse:   #FFFFFF;
+  --border-subtle:  #E5E7EB;
+  --border-strong:  #9CA3AF;
+  --focus-ring-color: #1E40AF;
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --touch-min: 24px;
+  --touch-comfortable: 44px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 9999px;
+}
+*:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

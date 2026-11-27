@@ -1,8 +1,10 @@
-﻿import { Router } from "express";
+import { Router } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import prisma from "../lib/prisma.js";
+import { idempotent } from "../lib/idempotency.js";
+import { saveDataUrl } from "../lib/uploads.js";
 import { generatePcNumber } from "../lib/pcNumber.js";
 import { writeAudit } from "../lib/audit.js";
 import { sendEmail } from "../lib/mailer.js";
@@ -27,7 +29,7 @@ function signToken(member) {
 }
 
 // POST /api/auth/register
-router.post("/register", authLimiter, uploadPhoto, async (req, res, next) => {
+router.post("/register", idempotent,authLimiter, uploadPhoto, async (req, res, next) => {
   try {
     const data = registerSchema.parse(req.body);
 
@@ -47,6 +49,12 @@ router.post("/register", authLimiter, uploadPhoto, async (req, res, next) => {
         location: data.location,
         identityNumber: data.identityNumber,
         photoPath: req.file ? req.file.filename : null,
+    dateOfBirth: body.dateOfBirth ? new Date(body.dateOfBirth) : null,
+    sex: body.sex || null,
+    subCounty: body.subCounty || null,
+    village: body.village || null,
+    maritalStatus: body.maritalStatus || null,
+    occupation: body.occupation || null,
         status: "TENTATIVE",
         pinHash,
         assistedBy: data.assistedBy || null,
@@ -63,12 +71,17 @@ router.post("/register", authLimiter, uploadPhoto, async (req, res, next) => {
     if (data.email) {
       await sendEmail({
         to: data.email,
-        subject: "Welcome to PLU — Your PC Number",
+        subject: "Welcome to PLU â€” Your PC Number",
         text: `Your PLU PC number is ${pcNumber}. Status: Tentative. You can sign in immediately.`,
       });
     }
 
     const token = signToken(member);
+    const __resp = {
+      token,
+      member: { pcNumber: member.pcNumber, name: member.name, status: member.status, phone: member.phone },
+    };
+    if (res.locals.storeIdempotent) await res.locals.storeIdempotent(__resp, 201);
     res.status(201).json({
       token,
       member: { pcNumber: member.pcNumber, name: member.name, status: member.status, phone: member.phone },
@@ -112,7 +125,7 @@ router.post("/forgot", authLimiter, async (req, res, next) => {
 
     await sendEmail({
       to: email,
-      subject: "PLU Mobi — PIN Reset Link",
+      subject: "PLU Mobi â€” PIN Reset Link",
       text: `Use this token to reset your PIN: ${token}\n\nThis link expires in 30 minutes.`,
     });
 
@@ -144,6 +157,7 @@ router.post("/reset", async (req, res, next) => {
 });
 
 export default router;
+
 
 
 

@@ -2,112 +2,101 @@
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../api/client";
 import { useAuth } from "../../store/auth";
-import Button from "../../components/Button";
-import StatusBadge from "../../components/StatusBadge";
-import { notify } from "../../lib/notify";
+import { Button, StatusChip } from "../../design-system/components";
+import { RoleGate } from "./components/RoleGate";
+import { ApprovalActions } from "./components/ApprovalActions";
+import { AuditLogViewer } from "./components/AuditLogViewer";
+
+const STATUS_MAP = {
+  tentative: { status: "tentative", label: "Tentative" },
+  active: { status: "approved", label: "Active" },
+  approved: { status: "approved", label: "Approved" },
+  rejected: { status: "rejected", label: "Rejected" },
+  flagged: { status: "neutral", label: "Flagged" },
+};
 
 export default function ReviewDetail() {
   const { id } = useParams();
   const nav = useNavigate();
-  const { token, member } = useAuth();
+  const { token } = useAuth();
   const [record, setRecord] = useState(null);
-  const [decision, setDecision] = useState("");
-  const [reason, setReason] = useState("");
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    if (!token) return nav("/login");
-    if (!member?.isReviewer) { setError("Forbidden"); return; }
-    api.get(`/review/${id}`)
+    if (!token) return;
+    api
+      .get(`/review/${id}`)
       .then((r) => setRecord(r.data.record))
       .catch((e) => setError(e.response?.data?.error || "Failed to load record"));
-  }, [id, token, member]);
+  }, [id, token]);
 
-  async function submit() {
-    setSaving(true); setError("");
+  async function submitDecision(decision, reason) {
+    setSaving(true);
+    setError("");
     try {
       await api.post(`/review/${id}/decision`, { decision, reason: reason || null });
       setDone(true);
-      notify("Decision recorded", `${record.pcNumber} was ${decision.toLowerCase()}.`);
     } catch (e) {
       setError(e.response?.data?.error || "Failed to submit decision");
-    } finally { setSaving(false); }
+    } finally {
+      setSaving(false);
+    }
   }
 
-  if (error) return <p className="text-center py-6 text-sm text-red-600">{error}</p>;
-  if (!record) return <p className="text-center py-6 text-sm text-plu-slate">Loading…</p>;
-
-  if (done) {
-    return (
-      <div className="bg-white rounded-card p-6 text-center space-y-3">
-        <h2 className="text-xl font-bold text-emerald-600">Decision recorded</h2>
-        <p className="text-sm text-plu-slate">{record.pcNumber} → status updated.</p>
-        <Button className="w-full" onClick={() => nav("/review")}>Back to queue</Button>
-      </div>
-    );
-  }
+  const statusKey = (record?.status || "tentative").toLowerCase();
+  const status = STATUS_MAP[statusKey] || STATUS_MAP.tentative;
 
   return (
-    <div className="space-y-4">
-      <div className="bg-plu-black text-white rounded-card p-5">
-        <p className="text-xs text-plu-yellow">REVIEW RECORD</p>
-        <h2 className="text-xl font-bold mt-1">{record.name}</h2>
-        <p className="font-mono text-sm">{record.pcNumber}</p>
-        <div className="mt-2"><StatusBadge status={record.status} /></div>
-      </div>
-      <div className="bg-white rounded-card p-5 space-y-2 text-sm">
-        <Row label="Pathway" value={record.pathway} />
-        <Row label="Phone" value={record.phone} />
-        <Row label="Email" value={record.email || "—"} />
-        <Row label="Location" value={record.location} />
-        <Row label="Registered" value={new Date(record.createdAt).toLocaleString()} />
-        <Row label="Assisted by" value={record.assistedBy || "—"} />
-      </div>
-      {record.reviewsReceived?.length > 0 && (
-        <div className="bg-white rounded-card p-4">
-          <p className="text-xs uppercase text-plu-slate tracking-wide mb-2">History</p>
-          {record.reviewsReceived.map((rv) => (
-            <div key={rv.id} className="border-t border-black/5 py-2 text-sm">
-              <p><strong>{rv.reviewer.pcNumber}</strong> — {rv.decision}
-                <span className="text-xs text-plu-slate"> · {new Date(rv.createdAt).toLocaleString()}</span>
-              </p>
-              {rv.reason && <p className="text-xs text-plu-slate mt-1">Reason: {rv.reason}</p>}
-            </div>
-          ))}
-        </div>
-      )}
-      <div className="bg-white rounded-card p-5 space-y-3">
-        <h3 className="font-bold">Record a decision</h3>
-        <div className="grid grid-cols-3 gap-2">
-          {["APPROVED", "REJECTED", "INFO_REQUESTED"].map((d) => (
-            <button key={d} onClick={() => setDecision(d)}
-              className={`py-2 rounded-card border text-xs font-semibold ${decision === d ? "border-plu-yellow bg-plu-yellow/20" : "border-black/10"}`}>
-              {d === "INFO_REQUESTED" ? "Request info" : d}
-            </button>
-          ))}
-        </div>
-        <label className="block">
-          <span className="text-xs text-plu-slate">Reason (optional)</span>
-          <textarea rows={3} value={reason} onChange={(e) => setReason(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-black/10 px-3 py-2 bg-plu-gray" />
-        </label>
-        {error && <p className="text-red-600 text-sm">{error}</p>}
-        <Button className="w-full" onClick={submit} disabled={!decision || saving}>
-          {saving ? "Saving…" : "Submit decision"}
-        </Button>
-      </div>
-    </div>
+    <main className="max-w-3xl mx-auto px-4 md:px-6 py-6 md:py-8 space-y-6">
+      <RoleGate>
+        {error && <p role="alert" className="text-sm text-status-rejected">{error}</p>}
+
+        {done && (
+          <div className="rounded-card border border-line-subtle bg-surface-base p-6 text-center space-y-3">
+            <h2 className="text-xl font-bold text-status-approved">Decision recorded</h2>
+            <p className="text-sm text-ink-secondary">{record.pcNumber} — status updated.</p>
+            <Button onClick={() => nav("/review")}>Back to queue</Button>
+          </div>
+        )}
+
+        {!done && !record && !error && (
+          <p role="status" aria-live="polite" className="text-sm text-ink-secondary">Loading…</p>
+        )}
+
+        {!done && record && (
+          <>
+            <section className="rounded-card border border-line-subtle bg-surface-base p-5 space-y-2">
+              <p className="text-xs uppercase tracking-widest text-ink-secondary">Review record</p>
+              <h1 className="text-2xl font-extrabold text-ink-primary">{record.name}</h1>
+              <p className="font-mono text-sm text-ink-secondary">{record.pcNumber}</p>
+              <StatusChip status={status.status}>{status.label}</StatusChip>
+            </section>
+
+            <section className="rounded-card border border-line-subtle bg-surface-base p-5">
+              <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                <div><dt className="text-xs text-ink-secondary">Pathway</dt><dd className="text-ink-primary">{record.pathway || "—"}</dd></div>
+                <div><dt className="text-xs text-ink-secondary">Phone</dt><dd className="text-ink-primary font-mono">{record.phone || "—"}</dd></div>
+                <div><dt className="text-xs text-ink-secondary">Email</dt><dd className="text-ink-primary">{record.email || "—"}</dd></div>
+                <div><dt className="text-xs text-ink-secondary">Location</dt><dd className="text-ink-primary">{record.location || "—"}</dd></div>
+                <div><dt className="text-xs text-ink-secondary">Registered</dt><dd className="text-ink-primary">{new Date(record.createdAt).toLocaleString()}</dd></div>
+                <div><dt className="text-xs text-ink-secondary">Assisted by</dt><dd className="text-ink-primary">{record.assistedBy || "—"}</dd></div>
+              </dl>
+            </section>
+
+            <section className="rounded-card border border-line-subtle bg-surface-base p-5 space-y-3">
+              <h2 className="text-sm font-semibold text-ink-primary">Decision</h2>
+              <ApprovalActions record={record} onDecision={submitDecision} saving={saving} />
+            </section>
+
+            <section className="rounded-card border border-line-subtle bg-surface-raised p-5 space-y-3">
+              <h2 className="text-sm font-semibold text-ink-primary">History</h2>
+              <AuditLogViewer reviews={record.reviewsReceived || []} />
+            </section>
+          </>
+        )}
+      </RoleGate>
+    </main>
   );
 }
-
-function Row({ label, value }) {
-  return (
-    <div className="flex justify-between gap-2">
-      <span className="text-plu-slate text-xs">{label}</span>
-      <span className="text-right">{value}</span>
-    </div>
-  );
-}
-

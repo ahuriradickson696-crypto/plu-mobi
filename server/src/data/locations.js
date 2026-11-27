@@ -1,4 +1,4 @@
-﻿export const DISTRICTS = [
+export const DISTRICTS = [
   { region: "Central",   name: "Kampala" },
   { region: "Central",   name: "Wakiso" },
   { region: "Central",   name: "Mukono" },

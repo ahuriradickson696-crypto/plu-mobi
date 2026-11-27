@@ -47,3 +47,12 @@ _logo_everywhere_*/
 *.sqlite
 *.sqlite3
 server/prisma/dev.db
+
+# Script backups - do not commit
+*.bak-*
+_bak/
+_d1_scripts/
+_d2_scripts/
+_offline_harden_*/
+phase-*.ps1
+new-*.txt

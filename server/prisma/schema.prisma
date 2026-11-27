@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -15,9 +15,15 @@ model Member {
   name          String
   pathway       String
   location      String
-  status        String
+  status        String   @default("ACTIVE")
   identityNumber String?
-  photoPath      String?   @default("TENTATIVE")
+  photoPath      String?
+  dateOfBirth     DateTime?
+  sex             String?
+  subCounty       String?
+  village         String?
+  maritalStatus   String?
+  occupation      String?
   pinHash       String
   resetToken    String?
   isReviewer    Boolean  @default(false)
@@ -34,6 +40,8 @@ model Member {
   auditAsTarget  AuditLog[]    @relation("AuditTarget")
 
   @@index([status])
+  consents          Consent[]
+  correctionTickets CorrectionTicket[]
 }
 
 model Endorsement {
@@ -70,9 +78,15 @@ model PatrioticOfficer {
   name     String
   role     String
   location String
-  status   String
+  status        String   @default("ACTIVE")
   identityNumber String?
-  photoPath      String? @default("ACTIVE")
+  photoPath      String?
+  dateOfBirth     DateTime?
+  sex             String?
+  subCounty       String?
+  village         String?
+  maritalStatus   String?
+  occupation      String?
 }
 
 model ReviewDecision {
@@ -103,7 +117,7 @@ model CorruptionReport {
   isAnonymous  Boolean  @default(false)
   evidenceNote String?
   evidencePath String?
-  status       String   @default("RECEIVED")
+  status        String   @default("RECEIVED")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -154,4 +168,39 @@ model PushSubscription {
   createdAt  DateTime @default(now())
 
   @@index([memberId])
+}
+
+
+
+model Consent {
+  id         String   @id @default(uuid())
+  memberId   String
+  scope      String
+  granted    Boolean
+  createdAt  DateTime @default(now())
+  member     Member   @relation(fields: [memberId], references: [id])
+}
+
+model CorrectionTicket {
+  id         String   @id @default(uuid())
+  memberId   String
+  field      String
+  newValue   String
+  reason     String?
+  status        String   @default("open")
+  createdAt  DateTime @default(now())
+  member     Member   @relation(fields: [memberId], references: [id])
+}
+
+
+// Idempotency records ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â prevents duplicate members on retry.
+// Standard: IETF draft-ietf-httpapi-idempotency-key-header
+model IdempotencyRecord {
+  id           String   @id @default(cuid())
+  key          String   @unique
+  responseBody Json
+  statusCode   Int      @default(200)
+  createdAt    DateTime @default(now())
+  expiresAt    DateTime
+  @@index([expiresAt])
 }

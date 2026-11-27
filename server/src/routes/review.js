@@ -2,6 +2,7 @@
 import prisma from "../lib/prisma.js";
 import { requireAuth, requireCapability } from "../middleware/auth.js";
 import { writeAudit } from "../lib/audit.js";
+import { idempotent } from "../lib/idempotency.js";
 
 const router = Router();
 
@@ -17,6 +18,13 @@ router.get("/queue", requireAuth, requireCapability("isReviewer"), async (_req, 
   res.json({ records });
 });
 
+router.get("/whoami", requireAuth, async (req, res) => {
+  res.json({
+    id: req.member.id,
+    pcNumber: req.member.pcNumber,
+    isReviewer: Boolean(req.member.isReviewer),
+  });
+});
 router.get("/:id", requireAuth, requireCapability("isReviewer"), async (req, res) => {
   const record = await prisma.member.findUnique({
     where: { id: req.params.id },
@@ -32,7 +40,7 @@ router.get("/:id", requireAuth, requireCapability("isReviewer"), async (req, res
   res.json({ record: safe });
 });
 
-router.post("/:id/decision", requireAuth, requireCapability("isReviewer"), async (req, res) => {
+router.post("/:id/decision", requireAuth, requireCapability("isReviewer"), idempotent,async (req, res) => {
   const { decision, reason } = req.body;
   if (!["APPROVED", "REJECTED", "INFO_REQUESTED"].includes(decision)) {
     return res.status(400).json({ error: "Invalid decision" });
@@ -58,8 +66,11 @@ router.post("/:id/decision", requireAuth, requireCapability("isReviewer"), async
     meta: { reason: reason || null },
   });
 
-  res.json({ ok: true, status: newStatus });
+  const __resp = { ok: true, status: newStatus };
+  if (res.locals.storeIdempotent) await res.locals.storeIdempotent(__resp);
+  res.json(__resp);
 });
 
 export default router;
+
 

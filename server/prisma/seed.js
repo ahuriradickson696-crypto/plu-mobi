@@ -7,9 +7,9 @@ async function main() {
   console.log("Seeding synthetic prototype data...");
 
   const officers = [
-    { poNumber: "PO-100001", name: "Test Officer Alpha",   role: "District Coordinator", location: "Kampala" },
-    { poNumber: "PO-100002", name: "Test Officer Bravo",   role: "Regional Lead",        location: "Gulu" },
-    { poNumber: "PO-100003", name: "Test Officer Charlie", role: "Field Liaison",        location: "Mbarara" },
+    { poNumber: "PO-100001", name: "Test Officer Alpha",   role: "District Coordinator", location: "Kampala",   status: "ACTIVE" },
+    { poNumber: "PO-100002", name: "Test Officer Bravo",   role: "Regional Lead",        location: "Gulu",        status: "ACTIVE" },
+    { poNumber: "PO-100003", name: "Test Officer Charlie", role: "Field Liaison",        location: "Mbarara",     status: "ACTIVE" },
   ];
   for (const o of officers) {
     await prisma.patrioticOfficer.upsert({

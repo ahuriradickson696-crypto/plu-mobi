@@ -1,4 +1,4 @@
-﻿import prisma from "./prisma.js";
+import prisma from "./prisma.js";
 
 export async function generatePcNumber() {
   for (let i = 0; i < 10; i++) {

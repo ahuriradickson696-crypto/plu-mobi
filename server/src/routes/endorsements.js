@@ -1,4 +1,4 @@
-﻿import { Router } from "express";
+import { Router } from "express";
 import prisma from "../lib/prisma.js";
 import { endorsementSchema } from "../validators/endorsement.js";
 import { writeAudit } from "../lib/audit.js";

@@ -1,4 +1,5 @@
 ﻿import express from "express";
+import rateLimit from "express-rate-limit";
 import cors from "cors";
 import helmet from "helmet";
 import dotenv from "dotenv";
@@ -45,6 +46,9 @@ import corruptionRoutes from "./routes/corruption.js";
 import eventsRoutes from "./routes/events.js";
 import pushRoutes from "./routes/push.js";
 import reportingRoutes from "./routes/reporting.js";
+import privacyRoutes from "./routes/privacy.js";
+import statsRoutes from "./routes/stats.js";
+import meRoutes from "./routes/me.js";
 
 const app = express();
 
@@ -52,7 +56,7 @@ const app = express();
 // Without this, req.ip is the proxy IP and rate limiting is useless in prod.
 app.set("trust proxy", 1);
 
-// Security headers (CSP off for now — SPA needs to be re-verified before we enable it)
+// Security headers (CSP off for now Ã¢â‚¬â€ SPA needs to be re-verified before we enable it)
 app.use(
   helmet({
     contentSecurityPolicy: false,
@@ -81,6 +85,15 @@ app.use(
 
 app.use(express.json({ limit: "100kb" }));
 
+// Rate limiting (Â§15 Security) â€” 200 requests per 15 minutes per IP
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 200,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.use("/api", limiter);
+
 app.get("/api/health", (_req, res) =>
   res.json({
     ok: true,
@@ -101,6 +114,9 @@ app.use("/api/corruption", corruptionRoutes);
 app.use("/api/events", eventsRoutes);
 app.use("/api/push", pushRoutes);
 app.use("/api/reporting", reportingRoutes);
+app.use("/api/privacy", privacyRoutes);
+app.use("/api/stats", statsRoutes);
+app.use("/api/me", meRoutes);
 
 // Global error handler
 app.use((err, _req, res, _next) => {
@@ -118,4 +134,5 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () =>
   console.log(`PLU Mobi API running on http://localhost:${PORT} (env=${process.env.NODE_ENV || "development"})`)
 );
+
 

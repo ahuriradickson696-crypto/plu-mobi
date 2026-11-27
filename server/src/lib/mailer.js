@@ -1,4 +1,4 @@
-﻿import nodemailer from "nodemailer";
+import nodemailer from "nodemailer";
 
 const hasLiveMail = process.env.MAILTRAP_USER && process.env.MAILTRAP_PASS;
 

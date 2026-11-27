@@ -1,0 +1,11 @@
+﻿{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "plu-mobi-worker",
+    "main": "src/index.ts",
+    "compatibility_date": "2026-11-18",
+    "compatibility_flags": ["nodejs_compat"],
+    "observability": {
+        "enabled": true
+    },
+    "upload_source_maps": true
+}
