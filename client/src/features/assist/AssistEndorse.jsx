@@ -250,7 +250,7 @@ export default function AssistEndorse() {
 
         <p className="text-xs text-plu-slate text-center">
           You are recording this endorsement on behalf of someone else. This is an ordinary
-          member capability — no special permission is required.
+          member capability - no special permission is required.
         </p>
       </form>
 

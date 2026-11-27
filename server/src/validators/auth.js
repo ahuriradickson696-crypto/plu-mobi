@@ -1,4 +1,4 @@
-import { z } from "zod";
+﻿import { z } from "zod";
 
 export const registerSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -15,9 +15,14 @@ export const registerSchema = z.object({
     .union([z.boolean(), z.string()])
     .refine((v) => v === true || v === "true", {
       message: "You must agree to the Privacy Policy and Terms of Service",
-    })
-    .transform(() => true),
-});
+    
+  sex: z.enum(["MALE","FEMALE"]),
+  dateOfBirth: z.string().min(1),
+  subCounty: z.string().min(1),
+  village: z.string().min(1),
+  occupation: z.string().optional().nullable(),
+  maritalStatus: z.string().optional().nullable(),
+}).passthrough();
 
 export const loginSchema = z.object({
   identifier: z.string().min(3, "Phone or email required"),

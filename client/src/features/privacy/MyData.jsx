@@ -41,7 +41,7 @@ export default function MyData() {
                      hover:brightness-95 transition-all
                      focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
-          Home <span aria-hidden="true">→</span>
+          Home <span aria-hidden="true"></span>
         </Link>
       </nav>
     </main>

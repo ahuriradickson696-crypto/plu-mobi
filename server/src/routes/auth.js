@@ -1,4 +1,4 @@
-import { Router } from "express";
+﻿import { Router } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
@@ -32,6 +32,7 @@ function signToken(member) {
 router.post("/register", idempotent,authLimiter, uploadPhoto, async (req, res, next) => {
   try {
     const data = registerSchema.parse(req.body);
+    const body = data; // alias — some older lines still reference body;
 
     const existing = await prisma.member.findUnique({ where: { phone: data.phone } });
     if (existing) return res.status(409).json({ error: "Phone number already registered" });
@@ -39,25 +40,24 @@ router.post("/register", idempotent,authLimiter, uploadPhoto, async (req, res, n
     const pinHash = await bcrypt.hash(data.pin, Number(process.env.PIN_SALT_ROUNDS || 10));
     const pcNumber = await generatePcNumber();
 
-    const member = await prisma.member.create({
+        const member = await prisma.member.create({
       data: {
         pcNumber,
         phone: data.phone,
         email: data.email || null,
         name: data.name,
-        pathway: data.pathway,
-        location: data.location,
-        identityNumber: data.identityNumber,
-        photoPath: req.file ? req.file.filename : null,
-    dateOfBirth: body.dateOfBirth ? new Date(body.dateOfBirth) : null,
-    sex: body.sex || null,
-    subCounty: body.subCounty || null,
-    village: body.village || null,
-    maritalStatus: body.maritalStatus || null,
-    occupation: body.occupation || null,
+        pathway: data.pathway || null,
+        location: data.location || null,
+        identityNumber: data.identityNumber || null,
+        photoPath: req.file ? "/uploads/photos/" + req.file.filename : null,
+        dateOfBirth: data.dateOfBirth ? new Date(data.dateOfBirth) : null,
+        sex: data.sex || null,
+        subCounty: data.subCounty || null,
+        village: data.village || null,
+        maritalStatus: data.maritalStatus || null,
+        occupation: data.occupation || null,
         status: "TENTATIVE",
         pinHash,
-        assistedBy: data.assistedBy || null,
       },
     });
 
@@ -71,7 +71,7 @@ router.post("/register", idempotent,authLimiter, uploadPhoto, async (req, res, n
     if (data.email) {
       await sendEmail({
         to: data.email,
-        subject: "Welcome to PLU â€” Your PC Number",
+        subject: "Welcome to PLU Ã¢â‚¬â€ Your PC Number",
         text: `Your PLU PC number is ${pcNumber}. Status: Tentative. You can sign in immediately.`,
       });
     }
@@ -101,9 +101,10 @@ router.post("/login", authLimiter, async (req, res, next) => {
     const ok = await bcrypt.compare(pin, member.pinHash);
     if (!ok) return res.status(401).json({ error: "Invalid credentials" });
 
+    const { pinHash: _ignore, ...safeMember } = member;
     res.json({
       token: signToken(member),
-      member: { pcNumber: member.pcNumber, name: member.name, status: member.status, phone: member.phone, email: member.email },
+      member: safeMember,
     });
   } catch (err) { next(err); }
 });
@@ -125,7 +126,7 @@ router.post("/forgot", authLimiter, async (req, res, next) => {
 
     await sendEmail({
       to: email,
-      subject: "PLU Mobi â€” PIN Reset Link",
+      subject: "PLU Mobi Ã¢â‚¬â€ PIN Reset Link",
       text: `Use this token to reset your PIN: ${token}\n\nThis link expires in 30 minutes.`,
     });
 

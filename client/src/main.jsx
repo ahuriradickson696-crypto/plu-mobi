@@ -6,7 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary.jsx";
 import { LanguageProvider } from "./locales/LanguageContext";
 import "./index.css";
 
-// Zustand store (useAuth) is global — no provider needed.
+// Zustand store (useAuth) is global - no provider needed.
 // LanguageProvider only used if the module exports one; otherwise pass-through.
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -33,7 +33,7 @@ if ("serviceWorker" in navigator && import.meta.env.PROD) {
           if (!newWorker) return;
           newWorker.addEventListener("statechange", () => {
             if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
-              // New version available — show refresh prompt
+              // New version available - show refresh prompt
               window.dispatchEvent(new CustomEvent("plu-sw-update"));
             }
           });

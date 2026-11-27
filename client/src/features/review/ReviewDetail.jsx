@@ -56,7 +56,7 @@ export default function ReviewDetail() {
         {done && (
           <div className="rounded-card border border-line-subtle bg-surface-base p-6 text-center space-y-3">
             <h2 className="text-xl font-bold text-status-approved">Decision recorded</h2>
-            <p className="text-sm text-ink-secondary">{record.pcNumber} — status updated.</p>
+            <p className="text-sm text-ink-secondary">{record.pcNumber} - status updated.</p>
             <Button onClick={() => nav("/review")}>Back to queue</Button>
           </div>
         )}
@@ -76,12 +76,12 @@ export default function ReviewDetail() {
 
             <section className="rounded-card border border-line-subtle bg-surface-base p-5">
               <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                <div><dt className="text-xs text-ink-secondary">Pathway</dt><dd className="text-ink-primary">{record.pathway || "—"}</dd></div>
-                <div><dt className="text-xs text-ink-secondary">Phone</dt><dd className="text-ink-primary font-mono">{record.phone || "—"}</dd></div>
-                <div><dt className="text-xs text-ink-secondary">Email</dt><dd className="text-ink-primary">{record.email || "—"}</dd></div>
-                <div><dt className="text-xs text-ink-secondary">Location</dt><dd className="text-ink-primary">{record.location || "—"}</dd></div>
+                <div><dt className="text-xs text-ink-secondary">Pathway</dt><dd className="text-ink-primary">{record.pathway || ""}</dd></div>
+                <div><dt className="text-xs text-ink-secondary">Phone</dt><dd className="text-ink-primary font-mono">{record.phone || ""}</dd></div>
+                <div><dt className="text-xs text-ink-secondary">Email</dt><dd className="text-ink-primary">{record.email || ""}</dd></div>
+                <div><dt className="text-xs text-ink-secondary">Location</dt><dd className="text-ink-primary">{record.location || ""}</dd></div>
                 <div><dt className="text-xs text-ink-secondary">Registered</dt><dd className="text-ink-primary">{new Date(record.createdAt).toLocaleString()}</dd></div>
-                <div><dt className="text-xs text-ink-secondary">Assisted by</dt><dd className="text-ink-primary">{record.assistedBy || "—"}</dd></div>
+                <div><dt className="text-xs text-ink-secondary">Assisted by</dt><dd className="text-ink-primary">{record.assistedBy || ""}</dd></div>
               </dl>
             </section>
 

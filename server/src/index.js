@@ -1,4 +1,5 @@
-﻿import express from "express";
+﻿import path from "path";
+import express from "express";
 import rateLimit from "express-rate-limit";
 import cors from "cors";
 import helmet from "helmet";
@@ -49,8 +50,10 @@ import reportingRoutes from "./routes/reporting.js";
 import privacyRoutes from "./routes/privacy.js";
 import statsRoutes from "./routes/stats.js";
 import meRoutes from "./routes/me.js";
-
 const app = express();
+
+// Serve uploaded files (photos live in uploads/photos/)
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 // Trust the first proxy hop (Render / nginx / Cloudflare).
 // Without this, req.ip is the proxy IP and rate limiting is useless in prod.
@@ -134,5 +137,3 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () =>
   console.log(`PLU Mobi API running on http://localhost:${PORT} (env=${process.env.NODE_ENV || "development"})`)
 );
-
-

@@ -1,4 +1,4 @@
-﻿import { Routes, Route, Link, useParams } from "react-router-dom";
+import { Routes, Route, Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Login from "./features/auth/Login";
 import Register from "./features/registration/Register";
@@ -28,7 +28,6 @@ import AdminHome from "./features/admin/AdminHome";
 import AdminUsers from "./features/admin/AdminUsers";
 import Header from "./components/Header";
 import SWUpdateBanner from "./components/SWUpdateBanner";
-import QueueDrawer from "./components/QueueDrawer";
 import InstallPrompt from "./components/InstallPrompt";
 import Stats from "./features/public/Stats";
 import MyData from "./features/privacy/MyData";
@@ -115,7 +114,7 @@ function HomeButton() {
   return (
     <Link
       to="/"
-      className="fixed bottom-4 left-4 z-50 flex items-center justify-center w-12 h-12 bg-plu-black rounded-full shadow-lg border-2 border-plu-yellow overflow-hidden hover:scale-105 transition-transform focus:outline-none focus-visible:ring-4 focus-visible:ring-plu-yellow/60"
+      className="fixed bottom-4 left-4 z-50 flex items-center justify-center w-12 h-12 bg-plu-black rounded-xl shadow-lg border-2 border-plu-yellow overflow-hidden hover:scale-105 transition-transform focus:outline-none focus-visible:ring-4 focus-visible:ring-plu-yellow/60"
       title="Back to Home"
       aria-label="Back to Home"
     >
@@ -139,9 +138,7 @@ export default function App() {
       <SWUpdateBanner />
       <InstallPrompt />
       <HomeButton />
-      <QueueDrawer />
-
-      <main id="main-content" tabIndex="-1" aria-label="Main content" className="flex-1 max-w-3xl md:max-w-5xl lg:max-w-6xl w-full mx-auto p-4 md:p-6 lg:p-8">
+<main id="main-content" tabIndex="-1" aria-label="Main content" className="flex-1 max-w-3xl md:max-w-5xl lg:max-w-6xl w-full mx-auto p-4 md:p-6 lg:p-8">
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
@@ -175,7 +172,7 @@ export default function App() {
   <img
     src="/plu-logo-circle.png"
     alt="PLU"
-    className="h-20 w-20 rounded-full object-cover border-2 border-plu-yellow"
+    className="h-20 w-20 rounded-xl object-cover border-2 border-plu-yellow"
     onError={(e) => { e.currentTarget.style.display = "none"; }}
   />
   <p className="text-sm text-plu-slate">Screen not built yet.</p>
@@ -195,7 +192,7 @@ export default function App() {
           <p className="text-xs text-white/60 mt-1">PLU Mobi Â· Official App</p>
         </div>
 
-        {/* Compact nav grid â€” 2 columns of app essentials */}
+        {/* Compact nav grid - 2 columns of app essentials */}
         <nav aria-label="Footer navigation" className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
           <Link to="/" className="py-2 text-white/80 hover:text-plu-yellow">Home</Link>
           <Link to="/about" className="py-2 text-white/80 hover:text-plu-yellow">About PLU</Link>
@@ -205,7 +202,7 @@ export default function App() {
           <Link to="/contact" className="py-2 text-white/80 hover:text-plu-yellow">Contact</Link>
         </nav>
 
-        {/* Legal links â€” horizontal strip, small but readable */}
+        {/* Legal links - horizontal strip, small but readable */}
         <div className="border-t border-white/10 pt-4">
           <nav aria-label="Legal" className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs">
             <Link to="/legal/privacy" className="text-white/60 hover:text-white py-1">Privacy</Link>
@@ -225,7 +222,7 @@ export default function App() {
           <a href="https://instagram.com" aria-label="Instagram" rel="noopener noreferrer" target="_blank" className="text-white/70 hover:text-plu-yellow text-sm py-2 px-3">Instagram</a>
         </div>
 
-        {/* Address + version â€” bottom block */}
+        {/* Address + version - bottom block */}
         <div className="text-center text-xs text-white/50 space-y-1 border-t border-white/10 pt-4">
           <p>Plot 7 Saddler Lane, Naguru, Kampala, Uganda</p>
           <p>Tel: 0414675689</p>
@@ -268,7 +265,7 @@ function Landing() {
               to="/dashboard"
               className="inline-flex items-center justify-center gap-2 bg-plu-yellow text-plu-black font-semibold px-5 py-3 rounded-xl hover:brightness-95 transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-plu-yellow/60"
             >
-              Go to My Dashboard <span aria-hidden>â†’</span>
+              Go to My Dashboard <span aria-hidden></span>
             </Link>
             <Link
               to="/card"
@@ -297,7 +294,7 @@ function Landing() {
 
       <Stats />
 
-      {/* PLU Info â€” full website content */}
+      {/* PLU Info - full website content */}
       <section aria-labelledby="plu-heading" className="space-y-10 pt-4">
 
         {/* VISION + MISSION split */}
@@ -326,7 +323,7 @@ function Landing() {
           </p>
         </div>
 
-        {/* CORE VALUES â€” numbered cards */}
+        {/* CORE VALUES - numbered cards */}
         <div>
           <div className="text-center mb-8">
             <p className="text-[10px] uppercase tracking-[0.25em] text-plu-slate font-bold mb-3">The PLU standard</p>
@@ -346,7 +343,7 @@ function Landing() {
               { n: "10", name: "Community Mobilisation", desc: "Organising citizens to participate in national development and grassroots transformation." },
             ].map((v) => (
               <div key={v.n} className="flex gap-3 bg-white rounded-card border border-plu-black/10 p-4 shadow-sm">
-                <span className="shrink-0 w-9 h-9 rounded-full bg-plu-black text-plu-yellow text-xs font-bold flex items-center justify-center">{v.n}</span>
+                <span className="shrink-0 w-9 h-9 rounded-xl bg-plu-black text-plu-yellow text-xs font-bold flex items-center justify-center">{v.n}</span>
                 <div>
                   <h3 className="font-bold text-plu-black text-sm">{v.name}</h3>
                   <p className="text-xs text-plu-slate mt-1 leading-relaxed">{v.desc}</p>
@@ -356,13 +353,13 @@ function Landing() {
           </div>
         </div>
 
-        {/* MOTTO â€” full-bleed band */}
+        {/* MOTTO - full-bleed band */}
         <div className="bg-plu-black text-white rounded-card px-6 py-10 md:py-14 text-center">
           <p className="text-[10px] uppercase tracking-[0.3em] text-plu-yellow font-bold mb-4">Our motto</p>
           <p className="text-3xl md:text-4xl font-extrabold italic text-plu-yellow leading-tight">"One God, One People, One Army!"</p>
         </div>
 
-        {/* KEY AREAS OF FOCUS â€” 4 numbered cards */}
+        {/* KEY AREAS OF FOCUS - 4 numbered cards */}
         <div>
           <div className="text-center mb-8">
             <h2 className="text-2xl md:text-3xl font-extrabold text-plu-black">Key Areas of Focus</h2>
@@ -383,7 +380,7 @@ function Landing() {
           </div>
         </div>
 
-        {/* HISTORY â€” timeline */}
+        {/* HISTORY - timeline */}
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
             <p className="text-[10px] uppercase tracking-[0.25em] text-plu-slate font-bold mb-3">Where we came from</p>
@@ -395,7 +392,7 @@ function Landing() {
                 <span className="text-lg font-extrabold text-plu-black">2024</span>
               </div>
               <div className="relative pl-6 border-l-2 border-plu-yellow pb-6">
-                <div className="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-plu-yellow border-2 border-white" />
+                <div className="absolute -left-[9px] top-1 w-4 h-4 rounded-xl bg-plu-yellow border-2 border-white" />
                 <h3 className="font-bold text-plu-black">A renewed public identity</h3>
                 <p className="text-sm text-plu-slate mt-1">The movement publicly rebranded and positioned itself around a stronger national and civic identity.</p>
               </div>
@@ -405,7 +402,7 @@ function Landing() {
                 <span className="text-lg font-extrabold text-plu-black">2025</span>
               </div>
               <div className="relative pl-6 border-l-2 border-plu-yellow">
-                <div className="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-plu-yellow border-2 border-white" />
+                <div className="absolute -left-[9px] top-1 w-4 h-4 rounded-xl bg-plu-yellow border-2 border-white" />
                 <h3 className="font-bold text-plu-black">Growing public engagement</h3>
                 <p className="text-sm text-plu-slate mt-1">PLU expanded its public presence through events, campaigns, and visible participation in national conversations.</p>
               </div>
@@ -414,12 +411,12 @@ function Landing() {
         </div>
 
 
-{/* LEADERSHIP â€” complete 21-profile, 4-tier structure from plu.org.ug */}
+{/* LEADERSHIP - complete 21-profile, 4-tier structure from plu.org.ug */}
 <div className="space-y-10">
         <div className="text-center max-w-2xl mx-auto">
           <p className="text-[10px] uppercase tracking-[0.25em] text-plu-slate font-bold mb-3">Who leads</p>
           <h2 className="text-2xl md:text-3xl font-extrabold text-plu-green">PLU Leadership</h2>
-          <p className="mt-2 text-sm text-plu-slate">Leadership in Service â€” United in national purpose.</p>
+          <p className="mt-2 text-sm text-plu-slate">Leadership in Service - United in national purpose.</p>
           <p className="mt-1 text-xs text-plu-slate">Guiding participation, responsibility and service across Uganda.</p>
         </div>
         <p className="text-center text-sm text-plu-slate max-w-2xl mx-auto">National responsibility is organised in clear tiers, beginning with the Chairman and continuing through the leadership teams that coordinate PLU work.</p>
@@ -431,12 +428,12 @@ function Landing() {
             <h3 className="font-extrabold text-plu-green">Chairman</h3>
           </div>
           <article className="p-6 border-2 border-plu-gold bg-amber-50/40 rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">MK</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/MK.jpg" className="w-full h-full object-cover" alt="Gen. Muhoozi" /></span>
               <img src="/leaders/chairman.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
-              <h4 className="font-bold text-plu-green text-lg">Gen. Muhoozi Kainerugaba â€” CDF, SPA/SO</h4>
+              <h4 className="font-bold text-plu-green text-lg">Gen. Muhoozi Kainerugaba - CDF, SPA/SO</h4>
               <p className="text-xs font-semibold text-plu-slate mb-3">Chairman, Patriotic League of Uganda</p>
               <p className="text-sm text-plu-slate text-left">As Chief of Defence Forces of the Uganda People's Defence Forces and Chairman of PLU, General Muhoozi Kainerugaba provides the movement with national leadership, discipline and a strong message of patriotic service. His public role places emphasis on mobilising Ugandans, especially young people, to take part in building the country's next phase of development.</p>
             </div>
@@ -450,8 +447,8 @@ function Landing() {
             <span className="text-xs text-plu-slate ml-auto">2 profiles</span>
           </div>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">MN</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/MN.jpg" className="w-full h-full object-cover" alt="Michael Nuwagira" /></span>
               <img src="/leaders/vice-chairman.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
@@ -461,13 +458,13 @@ function Landing() {
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">FT</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/FT.jpg" className="w-full h-full object-cover" alt="Fadil Twalla" /></span>
               <img src="/leaders/general-secretary.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
               <h4 className="font-bold text-plu-green text-lg">Hon. Fadil Twalla</h4>
-              <p className="text-xs font-semibold text-plu-slate mb-3">General Secretary â€” MP Tingey County</p>
+              <p className="text-xs font-semibold text-plu-slate mb-3">General Secretary - MP Tingey County</p>
               <p className="text-sm text-plu-slate text-left">Fadil Twalla serves as General Secretary following the June 2026 changes in the PLU leadership structure. He provides overall leadership to the Secretariat, coordinates the League's administrative and organisational affairs, and drives mobilisation across the country.</p>
             </div>
           </article>
@@ -480,41 +477,41 @@ function Landing() {
             <span className="text-xs text-plu-slate ml-auto">16 profiles</span>
           </div>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">BB</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/BB.jpg" className="w-full h-full object-cover" alt="Balaam Barugahara" /></span>
               <img src="/leaders/balaam.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
               <h4 className="font-bold text-plu-green text-lg">Hon. Balaam Barugahara Ateenyi</h4>
-              <p className="text-xs font-semibold text-plu-slate mb-3">Regional Vice Chairperson, Western â€” Minister of Local Government</p>
+              <p className="text-xs font-semibold text-plu-slate mb-3">Regional Vice Chairperson, Western - Minister of Local Government</p>
               <p className="text-sm text-plu-slate text-left">Hon. Balaam Barugahara Ateenyi serves on the Central Committee and as Regional Vice Chairperson for the Western Region.</p>
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">LA</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/LA.jpg" className="w-full h-full object-cover" alt="Lillian Aber" /></span>
               <img src="/leaders/lillian-aber.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
               <h4 className="font-bold text-plu-green text-lg">Hon. Lillian Aber</h4>
-              <p className="text-xs font-semibold text-plu-slate mb-3">Regional Vice Chairperson, Northern â€” Women Representative, Kitgum District</p>
+              <p className="text-xs font-semibold text-plu-slate mb-3">Regional Vice Chairperson, Northern - Women Representative, Kitgum District</p>
               <p className="text-sm text-plu-slate text-left">Hon. Lillian Aber serves on the Central Committee and is Minister of State for Relief, Disaster Preparedness and Refugees.</p>
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">KK</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/KK.jpg" className="w-full h-full object-cover" alt="Kiryowa Kiwanuka" /></span>
               <img src="/leaders/kiryowa.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
               <h4 className="font-bold text-plu-green text-lg">Hon. Kiryowa Kiwanuka</h4>
-              <p className="text-xs font-semibold text-plu-slate mb-3">Regional Vice Chairperson, Buganda â€” Minister of Defence and Veteran Affairs</p>
+              <p className="text-xs font-semibold text-plu-slate mb-3">Regional Vice Chairperson, Buganda - Minister of Defence and Veteran Affairs</p>
               <p className="text-sm text-plu-slate text-left">Hon. Kiryowa Kiwanuka serves on the Central Committee and as Regional Vice Chairperson for Buganda Region.</p>
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">AM</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/AM.jpg" className="w-full h-full object-cover" alt="Andrew Mwenda" /></span>
               <img src="/leaders/mwenda.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
@@ -524,8 +521,8 @@ function Landing() {
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">EK</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/EK.jpg" className="w-full h-full object-cover" alt="Edwin Karugire" /></span>
               <img src="/leaders/karugire.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
@@ -535,52 +532,52 @@ function Landing() {
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">MM</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/MM.jpg" className="w-full h-full object-cover" alt="Michael Mawanda" /></span>
               <img src="/leaders/mawanda.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
               <h4 className="font-bold text-plu-green text-lg">Hon. Michael Mawanda</h4>
-              <p className="text-xs font-semibold text-plu-slate mb-3">Director of Mobilisation â€” MP Igara East</p>
+              <p className="text-xs font-semibold text-plu-slate mb-3">Director of Mobilisation - MP Igara East</p>
               <p className="text-sm text-plu-slate text-left">Hon. Michael Mawanda, Member of Parliament for Igara East, serves as Director of Mobilisation.</p>
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">HB</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/HB.jpg" className="w-full h-full object-cover" alt="Henry Basaliza" /></span>
               <img src="/leaders/basaliza.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
               <h4 className="font-bold text-plu-green text-lg">Owek. Henry Basaliza</h4>
-              <p className="text-xs font-semibold text-plu-slate mb-3">Deputy Director Mobilisation â€” Dep. Prime Minister, Tooro Kingdom / Min. of Foreign Affairs and Inter-kingdom Relations</p>
+              <p className="text-xs font-semibold text-plu-slate mb-3">Deputy Director Mobilisation - Dep. Prime Minister, Tooro Kingdom / Min. of Foreign Affairs and Inter-kingdom Relations</p>
               <p className="text-sm text-plu-slate text-left">Henry Basaliza is a Central Committee member with roots in the Rwenzori sub-region.</p>
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">JO</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/JO.jpg" className="w-full h-full object-cover" alt="Jacob Oboth-Oboth" /></span>
               <img src="/leaders/oboth.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
               <h4 className="font-bold text-plu-green text-lg">Rt. Hon. Jacob Oboth-Oboth</h4>
-              <p className="text-xs font-semibold text-plu-slate mb-3">CEC Special Nominee to Parliament â€” Speaker of Parliament</p>
+              <p className="text-xs font-semibold text-plu-slate mb-3">CEC Special Nominee to Parliament - Speaker of Parliament</p>
               <p className="text-sm text-plu-slate text-left">Rt. Hon. Jacob Oboth-Oboth serves as Speaker of the 12th Parliament of Uganda and sits on the PLU Central Committee.</p>
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">TT</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/TT.jpg" className="w-full h-full object-cover" alt="Thomas Tayebwa" /></span>
               <img src="/leaders/tayebwa.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
               <h4 className="font-bold text-plu-green text-lg">Rt. Hon. Thomas Tayebwa</h4>
-              <p className="text-xs font-semibold text-plu-slate mb-3">Special Nominee to Parliament â€” Deputy Speaker of Parliament</p>
+              <p className="text-xs font-semibold text-plu-slate mb-3">Special Nominee to Parliament - Deputy Speaker of Parliament</p>
               <p className="text-sm text-plu-slate text-left">Rt. Hon. Thomas Tayebwa, Deputy Speaker of the 12th Parliament, is a member of the Central Committee.</p>
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">JR</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/JR.jpg" className="w-full h-full object-cover" alt="Jane Ruth Aceng" /></span>
               <img src="/leaders/aceng.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
@@ -590,8 +587,8 @@ function Landing() {
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">ST</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/ST.jpg" className="w-full h-full object-cover" alt="Sanjay Tanna" /></span>
               <img src="/leaders/tanna.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
@@ -601,8 +598,8 @@ function Landing() {
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">HK</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/HK.jpg" className="w-full h-full object-cover" alt="Hussein Kashillingi" /></span>
               <img src="/leaders/kashillingi.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
@@ -612,8 +609,8 @@ function Landing() {
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">AK</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/AK.jpg" className="w-full h-full object-cover" alt="Alan Kasujja" /></span>
               <img src="/leaders/kasujja.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
@@ -623,19 +620,19 @@ function Landing() {
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">DK</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/DK.jpg" className="w-full h-full object-cover" alt="David Kabanda" /></span>
               <img src="/leaders/kabanda.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
               <h4 className="font-bold text-plu-green text-lg">Hon. David Kabanda</h4>
-              <p className="text-xs font-semibold text-plu-slate mb-3">Central Committee Member â€” MP Kasambya County</p>
+              <p className="text-xs font-semibold text-plu-slate mb-3">Central Committee Member - MP Kasambya County</p>
               <p className="text-sm text-plu-slate text-left">Hon. David Kabanda, Member of Parliament for Kasambya County and former PLU Secretary General, remains part of the Central Committee.</p>
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">KR</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/KR.jpg" className="w-full h-full object-cover" alt="Kwame Ruyondo" /></span>
               <img src="/leaders/ruyondo.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
@@ -645,8 +642,8 @@ function Landing() {
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">GK</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/GK.jpg" className="w-full h-full object-cover" alt="Godfrey Baluku" /></span>
               <img src="/leaders/baluku.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
@@ -664,8 +661,8 @@ function Landing() {
             <span className="text-xs text-plu-slate ml-auto">2 profiles</span>
           </div>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">SR</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/SR.jpg" className="w-full h-full object-cover" alt="Steven Rutasharara" /></span>
               <img src="/leaders/rutasharara.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
@@ -675,8 +672,8 @@ function Landing() {
             </div>
           </article>
           <article className="p-6 border border-gray-200 bg-white rounded-xl flex flex-col items-center text-center gap-3">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
-              <span className="absolute">RK</span>
+            <div className="relative w-48 h-48 rounded-xl overflow-hidden bg-plu-green text-white font-extrabold text-4xl flex items-center justify-center flex-none">
+              <span className="absolute"><img src="/leaders/RK.jpg" className="w-full h-full object-cover" alt="Ronnie Kananura" /></span>
               <img src="/leaders/kananura.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </div>
             <div className="w-full">
@@ -700,8 +697,8 @@ function Landing() {
             <div className="bg-white rounded-card border border-plu-black/10 p-5">
               <p className="text-[10px] uppercase tracking-wider text-plu-slate font-semibold mb-3">Administration & Secretariat</p>
               <ul className="space-y-2 text-sm">
-                <li><span className="font-bold text-plu-black">Counsel Natamba Pascal</span><span className="text-plu-slate"> â€” Administrator</span></li>
-                <li><span className="font-bold text-plu-black">Mr. Simon Raymond Kadooli</span><span className="text-plu-slate"> â€” Administrator</span></li>
+                <li><span className="font-bold text-plu-black">Counsel Natamba Pascal</span><span className="text-plu-slate"> - Administrator</span></li>
+                <li><span className="font-bold text-plu-black">Mr. Simon Raymond Kadooli</span><span className="text-plu-slate"> - Administrator</span></li>
               </ul>
             </div>
             <div className="bg-white rounded-card border border-plu-black/10 p-5">
@@ -710,7 +707,7 @@ function Landing() {
             </div>
             <div className="bg-white rounded-card border border-plu-black/10 p-5">
               <p className="text-[10px] uppercase tracking-wider text-plu-slate font-semibold mb-3">Protocol</p>
-              <ul className="space-y-2 text-sm"><li><span className="font-bold text-plu-black">Mr. Mafaari N. Edson Ruheemba</span><span className="text-plu-slate"> â€” Head of Protocol</span></li></ul>
+              <ul className="space-y-2 text-sm"><li><span className="font-bold text-plu-black">Mr. Mafaari N. Edson Ruheemba</span><span className="text-plu-slate"> - Head of Protocol</span></li></ul>
             </div>
             <div className="bg-white rounded-card border border-plu-black/10 p-5">
               <p className="text-[10px] uppercase tracking-wider text-plu-slate font-semibold mb-3">Research, Monitoring & Evaluation</p>
@@ -719,7 +716,7 @@ function Landing() {
           </div>
         </div>
 
-{/* 96,207+ â€” split layout */}
+{/* 96,207+ - split layout */}
         <div className="bg-plu-yellow rounded-card p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <p className="text-[10px] uppercase tracking-[0.25em] text-plu-black/60 font-bold mb-1">Membership</p>

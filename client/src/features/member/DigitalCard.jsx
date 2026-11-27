@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../store/auth";
 import { Button, Alert } from "../../ui";
@@ -19,9 +19,9 @@ const TEXT_MUTED = "#5A4A2A";
 
 function pad(n) { return String(n).padStart(2, "0"); }
 function fmtDate(d) {
-  if (!d) return "----------";
+  if (!d) return "";
   const dt = new Date(d);
-  if (isNaN(dt)) return "----------";
+  if (isNaN(dt)) return "";
   const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
   return pad(dt.getDate()) + " " + months[dt.getMonth()] + " " + dt.getFullYear();
 }
@@ -32,17 +32,18 @@ function calcAge(d) {
   return Math.floor((Date.now() - dob.getTime()) / (1000 * 60 * 60 * 24 * 365.25));
 }
 function maskPhone(p) {
-  if (!p) return "----------";
+  if (!p) return "";
   const s = String(p);
   if (s.length < 6) return s;
   return s.slice(0, 4) + " XXX " + s.slice(-3);
 }
 function pretty(v) {
-  if (!v) return "----------";
+  if (!v) return "";
   return String(v).replace(/_/g, " ");
 }
 
 function F({ label, value, mono, light }) {
+  if (!value) return null;
   return (
     <div style={{ minWidth: 0 }}>
       <div style={{
@@ -56,7 +57,7 @@ function F({ label, value, mono, light }) {
         color: light ? WHITE : TEXT_DARK,
         whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
         lineHeight: 1.15,
-      }}>{value || "—"}</div>
+      }}>{value}</div>
     </div>
   );
 }
@@ -88,7 +89,7 @@ export default function DigitalCard() {
     try {
       const html2canvas = (await import("html2canvas")).default;
       const el = document.getElementById("plu-id-card");
-      const canvas = await html2canvas(el, { backgroundColor: GOLD, scale: 4, useCORS: true, logging: false });
+      const canvas = await html2canvas(el, { backgroundColor: "#FFC400", scale: 4, useCORS: true, logging: false, width: 338, height: 213, windowWidth: 400, windowHeight: 300, scrollX: 0, scrollY: 0 });
       const a = document.createElement("a");
       a.href = canvas.toDataURL("image/png");
       a.download = "PLU-card-" + member.pcNumber + ".png";
@@ -97,11 +98,13 @@ export default function DigitalCard() {
     finally { setDownloading(false); }
   }
 
-  const photoSrc = member.photoPath && member.photoPath.indexOf("/uploads/") === 0 ? member.photoPath : null;
+  const photoSrc = member.photoPath
+    ? (member.photoPath.startsWith("/uploads/") ? member.photoPath : "/uploads/photos/" + member.photoPath)
+    : null;
   const initials = (member.name || "?").split(/\s+/).map(w => (w[0] || "").toUpperCase()).slice(0, 2).join("");
 
   // ============================================================
-  // CARD SHELL — Party colors + background image
+  // CARD SHELL - Party colors + background image
   //   Layer 1: BG image
   //   Layer 2: white gradient overlay for readability
   //   Layer 3: content (black top bar, white body, black bottom bar)
@@ -123,7 +126,7 @@ export default function DigitalCard() {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }} />
-      {/* Layer 2: readability overlay — soft white, preserves image hints */}
+      {/* Layer 2: readability overlay - soft white, preserves image hints */}
       <div style={{
         position: "absolute", inset: 0,
         background: "linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.78) 50%, rgba(255,255,255,0.55) 100%)",
@@ -196,14 +199,14 @@ export default function DigitalCard() {
                 }}>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontSize: "6px", fontWeight: 900, color: TEXT_DARK, letterSpacing: "1px", textTransform: "uppercase" }}>National Identification Number</div>
-                    <div className="font-mono" style={{ fontSize: "15px", fontWeight: 900, color: BLACK, letterSpacing: "1.6px", lineHeight: 1.15 }}>{member.identityNumber || "----------"}</div>
+                    <div className="font-mono" style={{ fontSize: "15px", fontWeight: 900, color: BLACK, letterSpacing: "1.6px", lineHeight: 1.15 }}>{member.identityNumber || ""}</div>
                   </div>
                   <div style={{ fontSize: "6px", fontWeight: 900, color: RED, textAlign: "right", textTransform: "uppercase", letterSpacing: "0.3px" }}>
                     PLU<br/>Mobi
                   </div>
                 </div>
 
-                {/* BODY: photo + details — image shows through softly */}
+                {/* BODY: photo + details - image shows through softly */}
                 <div style={{ display: "flex", gap: "8px", padding: "6px 10px", flex: 1, minHeight: 0 }}>
                   <div style={{ flexShrink: 0, textAlign: "center" }}>
                     <div style={{
@@ -220,7 +223,7 @@ export default function DigitalCard() {
                         : <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", fontWeight: 900, color: TEXT_MUTED }}>{initials || "?"}</div>
                       }
                     </div>
-                    <div className="font-mono" style={{ fontSize: "6px", fontWeight: 900, color: TEXT_DARK, marginTop: "2px" }}>{member.pcNumber || "—"}</div>
+                    <div className="font-mono" style={{ fontSize: "6px", fontWeight: 900, color: TEXT_DARK, marginTop: "2px" }}>{member.pcNumber || "-"}</div>
                   </div>
 
                   <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", justifyContent: "space-between", gap: "3px" }}>
@@ -315,7 +318,7 @@ export default function DigitalCard() {
                     <div style={{ fontSize: "6px", fontWeight: 900, color: GOLD, textTransform: "uppercase", marginBottom: "1px", letterSpacing: "0.3px" }}>This card</div>
                     <div style={{ fontSize: "5.5px", fontWeight: 700, color: WHITE, lineHeight: 1.25 }}>Property of PLU</div>
                     <div style={{ fontSize: "5.5px", color: "rgba(255,255,255,0.75)", lineHeight: 1.25 }}>Non-transferable</div>
-                    <div style={{ fontSize: "5px", color: RED, lineHeight: 1.25, fontStyle: "italic" }}>Prototype — not a government ID</div>
+                    <div style={{ fontSize: "5px", color: RED, lineHeight: 1.25, fontStyle: "italic" }}>Prototype - not a government ID</div>
                   </div>
                 </div>
               </>

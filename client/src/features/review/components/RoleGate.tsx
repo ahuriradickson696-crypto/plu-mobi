@@ -4,7 +4,7 @@ import { useAuth } from "../../../store/auth";
 import api from "../../../api/client";
 
 /**
- * RoleGate — fails closed.
+ * RoleGate - fails closed.
  * Client flag is a hint only; server response is authoritative.
  * If the server does not confirm reviewer capability, the child never renders.
  */

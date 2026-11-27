@@ -25,7 +25,7 @@ export default class ErrorBoundary extends Component {
               Something went wrong
             </h1>
             <p className="text-sm text-plu-slate mb-4">
-              The page crashed. You can reload, or go back home — your data is safe
+              The page crashed. You can reload, or go back home - your data is safe
               and queued actions are not lost.
             </p>
             <div className="flex flex-col sm:flex-row gap-2 justify-center">

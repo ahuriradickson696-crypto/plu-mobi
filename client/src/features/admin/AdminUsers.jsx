@@ -155,7 +155,7 @@ export default function AdminUsers() {
                           u.isAdmin ? "bg-plu-yellow text-plu-black" : "bg-plu-black/5 text-plu-slate"
                         } disabled:opacity-40`}
                       >
-                        {u.isAdmin ? "✓" : "—"}
+                        {u.isAdmin ? "✓" : "-"}
                       </button>
                     </td>
                     <td className="px-2 py-2 text-center">
@@ -167,7 +167,7 @@ export default function AdminUsers() {
                           u.isReviewer ? "bg-plu-yellow text-plu-black" : "bg-plu-black/5 text-plu-slate"
                         } disabled:opacity-40`}
                       >
-                        {u.isReviewer ? "✓" : "—"}
+                        {u.isReviewer ? "✓" : "-"}
                       </button>
                     </td>
                     <td className="px-3 py-2 text-right space-x-1">
@@ -197,7 +197,7 @@ export default function AdminUsers() {
           </Button>
           <span className="text-sm text-plu-slate">Page {page} of {pages}</span>
           <Button variant="secondary" onClick={() => setPage((p) => Math.min(pages, p + 1))} disabled={page === pages}>
-            Next →
+            Next 
           </Button>
         </div>
       )}

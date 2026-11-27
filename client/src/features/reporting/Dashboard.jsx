@@ -94,7 +94,7 @@ export default function ReportingDashboard() {
               <li key={a.id} className="text-xs border-t border-black/5 pt-2 first:border-0 first:pt-0">
                 <p className="font-semibold">{a.action}</p>
                 <p className="text-plu-slate">
-                  {a.actorPc}{a.targetPc && ` → ${a.targetPc}`}{" · "}
+                  {a.actorPc}{a.targetPc && `  ${a.targetPc}`}{" · "}
                   {new Date(a.createdAt).toLocaleString()}
                 </p>
               </li>

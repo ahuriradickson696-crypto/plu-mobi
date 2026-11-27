@@ -19,7 +19,7 @@ OPERATING PRINCIPLES
 PLU Mobi is built under the open participation model, per the PLU Secretariat Binding Principles (V1.1):
 - Any person can register as a Patriotic Cadre at any time, without a campaign window or officer gate.
 - Every member receives a unique, permanent PC number (format PC-XXXXXX) as their primary identifier.
-- Any authenticated member can help another person register or endorse — a normal capability, not a privilege.
+- Any authenticated member can help another person register or endorse - a normal capability, not a privilege.
 - Membership remains Tentative until administrative review, which never blocks participation.
 - The Patriotic Officers register is a public reference only and is never a gate.
 - All simulated functionality is clearly labelled; nothing is presented as live operation that is not.
@@ -39,7 +39,7 @@ Last updated: ${LAST_UPDATED} · ${VERSION}`,
 
 This Privacy Policy explains how the Patriotic League of Uganda ("PLU", "we", "us") collects, uses, discloses, and protects your personal data when you use PLU Mobi. It is issued under the Uganda Data Protection and Privacy Act, 2019 (Act No. 7 of 2019) and its 2021 Regulations, and, for users in the European Economic Area, the General Data Protection Regulation (EU) 2016/679 ("GDPR").
 
-PART 1 — WHO WE ARE
+PART 1 - WHO WE ARE
 
 1.1 Data Controller
 ${CONTROLLER}
@@ -48,27 +48,27 @@ ${CONTROLLER}
 Email: ${DPO_EMAIL}
 Postal address: as above, marked "For the Attention of the DPO"
 
-PART 2 — DATA WE COLLECT AND WHY
+PART 2 - DATA WE COLLECT AND WHY
 
 2.1 Categories of Personal Data
-(a) Identity data — full name, phone number, optional email, optional National Identification Number (NIN), optional photograph.
-(b) Membership data — system-generated PC number, pathway (Uganda or Diaspora), district or country of residence, Tentative/Confirmed status, audit trail of who assisted registration.
-(c) Authentication data — hashed PIN (bcrypt, minimum 12 rounds), session tokens (JWT, signed, short-lived).
-(d) Technical data — IP address, device type, browser, log timestamps, for security and abuse prevention only.
-(e) Communication data — support tickets, feedback, and consent records.
+(a) Identity data - full name, phone number, optional email, optional National Identification Number (NIN), optional photograph.
+(b) Membership data - system-generated PC number, pathway (Uganda or Diaspora), district or country of residence, Tentative/Confirmed status, audit trail of who assisted registration.
+(c) Authentication data - hashed PIN (bcrypt, minimum 12 rounds), session tokens (JWT, signed, short-lived).
+(d) Technical data - IP address, device type, browser, log timestamps, for security and abuse prevention only.
+(e) Communication data - support tickets, feedback, and consent records.
 
 2.2 Lawful Basis for Processing
 We process personal data on the following lawful bases:
-(a) Consent — for optional data such as email, photograph, and endorsement publication.
-(b) Contractual necessity — to register you as a member and provide the service.
-(c) Legal obligation — to comply with the Uganda DPPA 2019, the Companies Act, and tax law.
-(d) Legitimate interest — for security, fraud prevention, service integrity, and (where lawful) statistics.
+(a) Consent - for optional data such as email, photograph, and endorsement publication.
+(b) Contractual necessity - to register you as a member and provide the service.
+(c) Legal obligation - to comply with the Uganda DPPA 2019, the Companies Act, and tax law.
+(d) Legitimate interest - for security, fraud prevention, service integrity, and (where lawful) statistics.
 
 2.3 Purposes
 We process personal data solely to:
 - Register you as a Patriotic Cadre and issue your PC number.
 - Authenticate you when you sign in (phone or email + 6-digit PIN).
-- Verify membership when the public enters your PC number — returning only the fields permitted by Blueprint §3.4 (name, PC number, status, pathway, district/country).
+- Verify membership when the public enters your PC number - returning only the fields permitted by Blueprint §3.4 (name, PC number, status, pathway, district/country).
 - Enable assisted registration and endorsement, with a basic audit of who helped whom (Blueprint FR-14).
 - Detect and prevent fraud, abuse, and security incidents.
 - Comply with legal obligations and respond to lawful requests.
@@ -80,7 +80,7 @@ We process personal data solely to:
 - No advertising profiles.
 - No artificial intelligence scoring of members.
 
-PART 3 — DISCLOSURE TO THIRD PARTIES
+PART 3 - DISCLOSURE TO THIRD PARTIES
 
 3.1 Categories of Recipients
 - Infrastructure providers (hosting and database), under written processor agreements.
@@ -90,7 +90,7 @@ PART 3 — DISCLOSURE TO THIRD PARTIES
 3.2 No Sale of Personal Data
 We do not sell, rent, or trade personal data.
 
-PART 4 — INTERNATIONAL TRANSFERS
+PART 4 - INTERNATIONAL TRANSFERS
 
 4.1 Location of Processing
 Our primary database is hosted in the European Union (Supabase, eu-west-1 region). Appropriate safeguards (EU Standard Contractual Clauses under GDPR Art. 46) apply. Transfers from Uganda are made under the Uganda DPPA 2019 §19 (adequacy or safeguards).
@@ -98,7 +98,7 @@ Our primary database is hosted in the European Union (Supabase, eu-west-1 region
 4.2 Rights Preserved
 Your rights under this Policy are not diminished by cross-border processing.
 
-PART 5 — RETENTION
+PART 5 - RETENTION
 
 5.1 Retention Periods
 - Active member records: retained while membership is active.
@@ -111,7 +111,7 @@ PART 5 — RETENTION
 5.2 Legal Holds
 Where a legal hold applies, retention is extended until the matter is concluded.
 
-PART 6 — SECURITY
+PART 6 - SECURITY
 
 6.1 Technical and Organisational Measures
 - TLS 1.2+ for all data in transit; HSTS enforced.
@@ -125,7 +125,7 @@ PART 6 — SECURITY
 6.2 Incident Notification
 If a breach affects your personal data, we will notify you and the Uganda Personal Data Protection Office without undue delay and, where feasible, within 72 hours of becoming aware, per DPPA 2019 §23 and GDPR Art. 33.
 
-PART 7 — YOUR RIGHTS
+PART 7 - YOUR RIGHTS
 
 7.1 Rights You Can Exercise
 Under DPPA 2019 (§§16–21) and GDPR (Arts. 15–22), you have the right to:
@@ -145,15 +145,15 @@ Use the "My Data" page in your dashboard (one-click access, export, correction, 
 7.3 Complaints
 You may complain to the Uganda Personal Data Protection Office (PDPO) at any time, or (for EEA users) to your local supervisory authority.
 
-PART 8 — CHILDREN
+PART 8 - CHILDREN
 
 PLU Mobi is not directed at children under 18. Where a member is 16–17, guardian consent is required. If we learn that we have collected data from a child without consent, we will delete it promptly.
 
-PART 9 — CHANGES
+PART 9 - CHANGES
 
 We will notify you of material changes in-app and by email (if provided) at least 30 days before they take effect. Continued use after the effective date constitutes acceptance.
 
-PART 10 — CONTACT
+PART 10 - CONTACT
 
 Data Protection Officer: ${DPO_EMAIL}
 General support: ${SUPPORT_EMAIL}
@@ -285,7 +285,7 @@ BY USING THE SERVICE, YOU AGREE TO THESE TERMS. IF YOU DO NOT AGREE, DO NOT USE 
 
 4.2 No Patriotic Officer gate exists. You do not need any officer's approval to register, verify, endorse, or assist.
 
-4.3 Any authenticated member may assist another person to register or endorse. This is a normal capability recorded in an audit log — not a privilege.
+4.3 Any authenticated member may assist another person to register or endorse. This is a normal capability recorded in an audit log - not a privilege.
 
 4.4 Assisted registration does not require any approval from an officer or administrator.
 
@@ -404,13 +404,13 @@ You agree to indemnify and hold PLU harmless from any claim arising from your br
 
 20. GENERAL
 
-20.1 Severability — If any provision is held invalid, the remaining provisions remain in full force.
+20.1 Severability - If any provision is held invalid, the remaining provisions remain in full force.
 
-20.2 Waiver — Our failure to enforce a provision is not a waiver.
+20.2 Waiver - Our failure to enforce a provision is not a waiver.
 
-20.3 Entire Agreement — These Terms and the Privacy Policy constitute the entire agreement between you and PLU.
+20.3 Entire Agreement - These Terms and the Privacy Policy constitute the entire agreement between you and PLU.
 
-20.4 Assignment — You may not assign these Terms; we may assign them to a successor entity.
+20.4 Assignment - You may not assign these Terms; we may assign them to a successor entity.
 
 21. CONTACT
 
@@ -436,17 +436,17 @@ Cookies are small text files stored on your device when you visit a website. The
 2. CATEGORIES WE USE
 
 2.1 Strictly Necessary (no consent required)
-- Session token — maintains your authenticated session.
-- CSRF token — protects against cross-site request forgery.
-- Load balancer — routes requests to the correct server.
+- Session token - maintains your authenticated session.
+- CSRF token - protects against cross-site request forgery.
+- Load balancer - routes requests to the correct server.
 
 2.2 Functional (consent required)
-- Language preference (en, lg, sw) — remembers your chosen language.
-- Theme preference — light/dark mode if enabled.
-- Last visited page — improves navigation.
+- Language preference (en, lg, sw) - remembers your chosen language.
+- Theme preference - light/dark mode if enabled.
+- Last visited page - improves navigation.
 
 2.3 Analytics (consent required)
-- Aggregated, anonymised usage statistics — helps improve the Service.
+- Aggregated, anonymised usage statistics - helps improve the Service.
 - No personal identifiers are linked.
 
 3. WHAT WE DO NOT USE
@@ -641,7 +641,7 @@ If you discover a vulnerability, please report it to security@plu-mobi.ug before
 5. USER RESPONSIBILITIES
 
 Help us keep your account secure:
-- Never share your PIN — not even with PLU staff.
+- Never share your PIN - not even with PLU staff.
 - Sign out on shared devices.
 - Report suspicious messages to security@plu-mobi.ug.
 
@@ -667,16 +667,16 @@ Q: Do I need a Patriotic Officer to join?
 A: No. Anyone can register themselves or help a friend. No officer gate exists anywhere in the Service.
 
 Q: How do I reset my PIN?
-A: Click "Forgot PIN" on the sign-in page. A reset token will be emailed to you if you have an email on file. A cadre number alone cannot reset the PIN — you need email or phone verification.
+A: Click "Forgot PIN" on the sign-in page. A reset token will be emailed to you if you have an email on file. A cadre number alone cannot reset the PIN - you need email or phone verification.
 
 Q: Can I help someone else register?
-A: Yes. Sign in and click "Help register" on your dashboard. You will need their informed consent and accurate information. This is a normal capability recorded in the audit log — not a privilege.
+A: Yes. Sign in and click "Help register" on your dashboard. You will need their informed consent and accurate information. This is a normal capability recorded in the audit log - not a privilege.
 
 Q: How do I verify a membership?
 A: Open the Verify page and enter a PC number, or scan the QR code on any digital card. Verification returns only permitted public fields (name, PC number, status, pathway, district/country).
 
 Q: Does the app work offline?
-A: Yes — the Service is designed to operate offline-first. Public content is cached; registration and endorsement drafts are queued and synchronised when connectivity returns. Pending and last-synced status are always visible.
+A: Yes - the Service is designed to operate offline-first. Public content is cached; registration and endorsement drafts are queued and synchronised when connectivity returns. Pending and last-synced status are always visible.
 
 Q: How do I install PLU Mobi on my phone?
 A: Open the site in your browser and tap "Add to Home Screen" (iPhone) or "Install app" (Android). It will behave like a native app.

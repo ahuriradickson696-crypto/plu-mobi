@@ -57,7 +57,7 @@ export default function AssistRegister() {
     <div className="space-y-3">
       <div className="bg-plu-yellow text-plu-black rounded-card p-4 text-sm font-medium">
         You are registering another person as <strong>{member.pcNumber}</strong>.
-        Their PIN is theirs only — you will not retain it.
+        Their PIN is theirs only - you will not retain it.
       </div>
 
       <div className="bg-white rounded-card p-5 space-y-3">
@@ -91,7 +91,7 @@ export default function AssistRegister() {
                 className="mt-1 w-full rounded-lg border border-black/10 px-3 py-2 bg-plu-gray">
                 <option value="">Select a district…</option>
                 {DISTRICTS.map((d) => (
-                  <option key={d.name} value={d.name}>{d.region} — {d.name}</option>
+                  <option key={d.name} value={d.name}>{d.region} - {d.name}</option>
                 ))}
                 <option value={NOT_LISTED}>Not listed</option>
               </select>

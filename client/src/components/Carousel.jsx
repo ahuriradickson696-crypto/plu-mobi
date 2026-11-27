@@ -63,7 +63,7 @@ export default function Carousel() {
               <div>
                 <span className="inline-flex items-center gap-2 bg-plu-yellow text-plu-black font-bold text-base md:text-lg px-6 py-3 rounded-xl group-hover:scale-105 transition-transform shadow-lg">
                   {slide.cta}
-                  <span aria-hidden>→</span>
+                  <span aria-hidden></span>
                 </span>
               </div>
             </div>

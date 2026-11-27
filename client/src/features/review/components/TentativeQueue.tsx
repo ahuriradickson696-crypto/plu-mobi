@@ -84,7 +84,7 @@ export function TentativeQueue({ records }) {
                   <td className="px-3 py-2">{r.name}</td>
                   <td className="px-3 py-2">{r.location}</td>
                   <td className="px-3 py-2">{new Date(r.createdAt).toLocaleDateString()}</td>
-                  <td className="px-3 py-2">{r.assistedBy || "—"}</td>
+                  <td className="px-3 py-2">{r.assistedBy || ""}</td>
                 </tr>
               ))}
             </tbody>

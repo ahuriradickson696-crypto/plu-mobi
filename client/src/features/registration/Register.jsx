@@ -171,7 +171,7 @@ export default function Register() {
       const payload = { ...form };
       if (!payload.email) delete payload.email;
 
-      if (!navigator.onLine) {
+      if (false) /* disabled: navigator.onLine unreliable */ {
         const photoBase64 = photo ? await fileToBase64(photo) : null;
         await enqueue({
           url: "http://localhost:4000/api/auth/register",
@@ -179,6 +179,12 @@ export default function Register() {
           photo: photoBase64,
         });
         setSuccess({ pcNumber: "PENDING", name: form.name, status: "TENTATIVE", queuedOffline: true });
+
+      // Auto-login: connect registration to card
+      if (resp && resp.token && resp.member) {
+        setSession({ token: resp.token, member: resp.member });
+        nav("/dashboard");
+      }
         clearDraft();
         return;
       }
@@ -201,6 +207,12 @@ export default function Register() {
         const photoBase64 = photo ? await fileToBase64(photo) : null;
         await enqueue({ url: "http://localhost:4000/api/auth/register", body: form, photo: photoBase64 });
         setSuccess({ pcNumber: "PENDING", name: form.name, status: "TENTATIVE", queuedOffline: true });
+
+      // Auto-login: connect registration to card
+      if (resp && resp.token && resp.member) {
+        setSession({ token: resp.token, member: resp.member });
+        nav("/dashboard");
+      }
         clearDraft();
       } else {
         const resp = e.response?.data || {};

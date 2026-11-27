@@ -27,21 +27,21 @@ const DISTRICTS = [
 // Example (do not use until confirmed):
 //   { role: "Secretary General", name: "[confirmed by PLU on YYYY-MM-DD]" }
 const LEADERSHIP = [
-  { role: "Chairman", name: "Gen. Muhoozi Kainerugaba" },
-  { role: "National Vice Chairman", name: "Michael Nuwagira" },
-  { role: "General Secretary", name: "Hon. Fadil Twalla" },
-  { role: "Regional Vice Chairperson, Western", name: "Hon. Balaam Barugahara Ateenyi" },
-  { role: "Regional Vice Chairperson, Buganda", name: "Hon. Kiryowa Kiwanuka" },
-  { role: "Central Committee", name: "Hon. Lillian Aber" },
-  { role: "Central Committee", name: "Andrew Mwenda" },
-  { role: "Director of Legal Affairs", name: "Edwin Karugire" },
-  { role: "Director of Mobilisation", name: "Hon. Michael Mawanda" },
-  { role: "Central Committee", name: "Owek. Henry Basaliza" },
-  { role: "Central Committee", name: "Rt. Hon. Jacob Oboth-Oboth" },
-  { role: "Central Committee", name: "Thomas Tayebwa" },
-  { role: "Central Committee", name: "Dr. Jane Ruth Aceng" },
-  { role: "Central Committee", name: "Hon. Sanjay Tanna" },
-  { role: "Central Committee", name: "Hussein Kashillingi" },
+  { role: "Chairman", name: "Gen. Muhoozi Kainerugaba", img: "MK.jpg" },
+  { role: "National Vice Chairman", name: "Michael Nuwagira", img: "MN.jpg" },
+  { role: "General Secretary", name: "Hon. Fadil Twalla", img: "FT.jpg" },
+  { role: "Regional Vice Chairperson, Western", name: "Hon. Balaam Barugahara Ateenyi", img: "BB.jpg" },
+  { role: "Regional Vice Chairperson, Buganda", name: "Hon. Kiryowa Kiwanuka", img: "KK.jpg" },
+  { role: "Central Committee", name: "Hon. Lillian Aber", img: "LA.jpg" },
+  { role: "Central Committee", name: "Andrew Mwenda", img: "AM.jpg" },
+  { role: "Director of Legal Affairs", name: "Edwin Karugire", img: "EK.jpg" },
+  { role: "Director of Mobilisation", name: "Hon. Michael Mawanda", img: "MM.jpg" },
+  { role: "Central Committee", name: "Owek. Henry Basaliza", img: "HB.jpg" },
+  { role: "Central Committee", name: "Rt. Hon. Jacob Oboth-Oboth", img: "JO.jpg" },
+  { role: "Central Committee", name: "Thomas Tayebwa", img: "TT.jpg" },
+  { role: "Central Committee", name: "Dr. Jane Ruth Aceng", img: "JR.jpg" },
+  { role: "Central Committee", name: "Hon. Sanjay Tanna", img: "ST.jpg" },
+  { role: "Central Committee", name: "Hussein Kashillingi", img: "HK.jpg" },
 ];
 
 export default function AboutPLU() {
@@ -98,8 +98,20 @@ export default function AboutPLU() {
         ) : (
           <ul className="text-sm text-ink-secondary space-y-1">
             {LEADERSHIP.map((l) => (
-              <li key={l.role}>
-                <span className="font-semibold text-ink-primary">{l.role}:</span> {l.name}
+              <li key={l.name} className="flex items-center gap-4 py-3 border-b border-gray-200 last:border-0">
+                <div className="h-16 w-16 rounded-xl overflow-hidden shrink-0 shadow-md border border-gray-200 bg-gray-200">
+                  {l.img ? (
+                    <img src={`/leaders/${l.img}`} alt={l.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-500 font-bold">
+                      {l.name.charAt(0)}
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <div className="font-bold text-ink-primary">{l.name}</div>
+                  <div className="text-sm text-gray-600">{l.role}</div>
+                </div>
               </li>
             ))}
           </ul>

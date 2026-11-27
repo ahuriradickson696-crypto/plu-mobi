@@ -31,7 +31,7 @@ export default function Officers() {
         <div key={o.id} className="bg-white rounded-card p-4 shadow-sm">
           <p className="font-mono text-xs text-plu-slate">{o.poNumber}</p>
           <p className="font-semibold">{o.name}</p>
-          <p className="text-sm">{o.role} — {o.location}</p>
+          <p className="text-sm">{o.role} - {o.location}</p>
           <p className="text-xs text-emerald-700 mt-1">{o.status}</p>
         </div>
       ))}

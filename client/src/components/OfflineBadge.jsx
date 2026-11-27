@@ -21,7 +21,7 @@ export default function OfflineBadge() {
   }, []);
 
   if (online && pending === 0) return null;
-  const label = !online ? `Offline${pending ? ` — ${pending} pending` : ""}` : `${pending} queued`;
+  const label = !online ? `Offline${pending ? ` - ${pending} pending` : ""}` : `${pending} queued`;
 
   return (
     <div role="status" aria-live="polite"

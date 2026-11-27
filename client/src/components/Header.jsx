@@ -84,7 +84,7 @@ export default function Header() {
           <div className="flex items-center gap-2 md:gap-3">
             {token && member ? (
               <>
-                {/* Status chip — visible on md+ */}
+                {/* Status chip - visible on md+ */}
                 <span
                   className={`hidden md:inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full border ${statusTone}`}
                 >
@@ -92,7 +92,7 @@ export default function Header() {
                   {statusLabel}
                 </span>
 
-                {/* PC number — monospace, subtle */}
+                {/* PC number - monospace, subtle */}
                 <span className="hidden lg:inline text-white/60 font-mono text-xs">
                   {member.pcNumber}
                 </span>
@@ -187,7 +187,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Bottom accent line — subtle yellow brand rule */}
+      {/* Bottom accent line - subtle yellow brand rule */}
       <div className="h-0.5 bg-gradient-to-r from-transparent via-plu-yellow to-transparent" />
 
       {/* Small CSS animation for menu dropdown */}

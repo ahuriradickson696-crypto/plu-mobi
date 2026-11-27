@@ -7,8 +7,8 @@
       {reviews.map((rv) => (
         <li key={rv.id} className="border-t border-line-subtle pt-2 first:border-t-0 first:pt-0">
           <p className="text-sm text-ink-primary">
-            <span className="font-mono">{rv.reviewer?.pcNumber || "—"}</span>{" "}
-            — {rv.decision}{" "}
+            <span className="font-mono">{rv.reviewer?.pcNumber || ""}</span>{" "}
+            - {rv.decision}{" "}
             <span className="text-xs text-ink-secondary">
               · {new Date(rv.createdAt).toLocaleString()}
             </span>

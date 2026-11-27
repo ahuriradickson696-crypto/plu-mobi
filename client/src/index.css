@@ -66,3 +66,65 @@ a.no-underline { text-decoration: none; }
 #main-content:focus {
   outline: none;
 }
+
+/* ==== GLOBAL BLURRED BACKGROUND ==== */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  background: url("/app-bg.jpg") center center / cover no-repeat;
+  filter: blur(14px) brightness(1.05);
+  transform: scale(1.08);
+  z-index: -2; pointer-events: none;
+}
+body::after {
+  content: "";
+  position: fixed; inset: 0;
+  background: rgba(255,255,255,0.72);
+  z-index: -1; pointer-events: none;
+}
+#root, #app, .app-shell { background: transparent !important; }
+@media print { body::before, body::after { display: none !important; } }
+
+/* ==== PRINT: full card, no clipping ==== */
+@media print {
+  body * { visibility: hidden !important; }
+  #plu-id-card, #plu-id-card * { visibility: visible !important; }
+  #plu-id-card {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) scale(1.1) !important;
+    box-shadow: none !important;
+  }
+  /* Let long values wrap instead of ellipsis-clip */
+  #plu-id-card [style*="white-space: nowrap"] {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    word-break: break-word !important;
+  }
+  /* Lift any overflow:hidden on the card shell for print */
+  #plu-id-card > div { overflow: visible !important; }
+  
+}
+/* ==== PRINT: full card, no clipping ==== */
+@media print {
+  body * { visibility: hidden !important; }
+  #plu-id-card, #plu-id-card * { visibility: visible !important; }
+  #plu-id-card {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) scale(1.1) !important;
+    box-shadow: none !important;
+  }
+  #plu-id-card [style*="white-space: nowrap"] {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    word-break: break-word !important;
+  }
+  #plu-id-card > div { overflow: visible !important; }
+  
+}
+@media print { body * { visibility: hidden !important; } #plu-id-card, #plu-id-card * { visibility: visible !important; } #plu-id-card { position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) scale(1.1) !important; } @page { size: auto; margin: 10mm; } }

@@ -18,7 +18,7 @@ export default function ForgotPin() {
         <h2 className="text-xl font-bold">Check your email</h2>
         <p className="text-sm text-plu-slate">
           If that address is registered, a reset token has been sent. In the prototype it prints
-          to the server's test outbox — check the server terminal.
+          to the server's test outbox - check the server terminal.
         </p>
       </div>
     );

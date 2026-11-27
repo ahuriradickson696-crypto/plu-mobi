@@ -72,8 +72,8 @@ export default function CorruptionDetail() {
           <Row label="Reporter" value="Anonymous" />
         ) : (
           <>
-            <Row label="Reporter" value={report.reporterName || "—"} />
-            <Row label="Phone" value={report.reporterPhone || "—"} />
+            <Row label="Reporter" value={report.reporterName || ""} />
+            <Row label="Phone" value={report.reporterPhone || ""} />
           </>
         )}
       </div>

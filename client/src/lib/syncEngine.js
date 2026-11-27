@@ -1,5 +1,5 @@
 ﻿/**
- * Sync engine — flushes the offline queue with backoff, token refresh,
+ * Sync engine - flushes the offline queue with backoff, token refresh,
  * per-item error capture, and audit.
  */
 import api from "../api/client";
@@ -65,7 +65,7 @@ export async function flushQueue({ onProgress } = {}) {
           } catch {
             await updateQueueItem(item.id, {
               status: "failed", attempts,
-              lastError: "Session expired — sign in and retry.",
+              lastError: "Session expired - sign in and retry.",
             });
             failed++;
             continue;

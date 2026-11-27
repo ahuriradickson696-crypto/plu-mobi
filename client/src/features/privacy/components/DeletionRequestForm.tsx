@@ -15,7 +15,7 @@ export function DeletionRequestForm() {
     setStatus("loading");
     try {
       const result = await requestDeletion({ reason, confirmation });
-      setStatus(`${result.ticketId} — ${result.note}`);
+      setStatus(`${result.ticketId} - ${result.note}`);
       setReason("");
       setConfirmation("");
     } catch {

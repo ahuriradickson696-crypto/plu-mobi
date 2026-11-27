@@ -7,7 +7,7 @@
  * Behavior:
  *  - Android / Desktop Chrome: captures beforeinstallprompt, shows custom
  *    banner with an "Install" button that triggers the native prompt.
- *  - iOS Safari: shows manual instructions ("Tap Share → Add to Home Screen").
+ *  - iOS Safari: shows manual instructions ("Tap Share  Add to Home Screen").
  *  - If already installed (display-mode: standalone), does nothing.
  *  - If user dismisses, stays hidden for 7 days (localStorage).
  */
@@ -31,7 +31,7 @@ export default function InstallPrompt() {
       return;
     }
 
-    // Detect iOS (Safari only — Chrome on iOS doesn't support install)
+    // Detect iOS (Safari only - Chrome on iOS doesn't support install)
     const ua = window.navigator.userAgent;
     const iOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
     setIsIOS(iOS);
@@ -70,7 +70,7 @@ export default function InstallPrompt() {
 
   async function handleInstall() {
     if (isIOS) {
-      // iOS: no prompt — show inline hint
+      // iOS: no prompt - show inline hint
       return;
     }
     if (!deferredPrompt) return;

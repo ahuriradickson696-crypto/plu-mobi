@@ -1,5 +1,5 @@
 ﻿/**
- * Offline queue — IndexedDB + AES-GCM encryption + idempotency + backoff.
+ * Offline queue - IndexedDB + AES-GCM encryption + idempotency + backoff.
  * Standards: W3C IndexedDB 3.0, WebCrypto, IETF Idempotency-Key.
  */
 import { openDB } from "idb";

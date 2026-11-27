@@ -58,7 +58,7 @@ export default function Dashboard() {
                 {member.fullName || "Member"}
               </h1>
               <p className="font-mono text-sm text-ink-secondary mt-1">
-                {member.pcNumber || "—"}
+                {member.pcNumber || ""}
               </p>
             </div>
           </div>
@@ -126,7 +126,7 @@ export default function Dashboard() {
                      hover:brightness-95 transition-all
                      focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
-          Home <span aria-hidden="true">→</span>
+          Home <span aria-hidden="true"></span>
         </Link>
       </nav>
     </main>

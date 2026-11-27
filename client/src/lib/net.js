@@ -8,18 +8,41 @@
  *   else setError(classifyError(err));
  */
 
-/** True if the browser reports a network connection */
 export function isOnline() {
-  return typeof navigator !== "undefined" ? navigator.onLine : true;
+  // navigator.onLine is unreliable in dev/VPN/privacy modes.
+  // Let the actual request determine connectivity.
+  return true;
+}
+
+let _lastPingOk = true;
+let _lastPingAt = 0;
+
+export async function checkServerReachable() {
+  try {
+    const base =
+      (typeof window !== "undefined" && window.__API_BASE__) ||
+      "http://localhost:4000";
+    const res = await fetch(base.replace(/\/$/, "") + "/api/health", {
+      method: "GET",
+      cache: "no-store",
+      signal: AbortSignal.timeout(3000),
+    });
+    _lastPingOk = !!res.ok;
+    _lastPingAt = Date.now();
+    return res.ok;
+  } catch {
+    _lastPingOk = false;
+    return false;
+  }
 }
 
 /**
  * Classify an axios/fetch error into a user-friendly message.
  *
  * Rules:
- *   - If browser says offline → "You are offline..."
- *   - If no HTTP response → "Cannot reach the server..."
- *   - If 4xx/5xx → use server-provided error, or generic fallback
+ *   - If browser says offline  "You are offline..."
+ *   - If no HTTP response  "Cannot reach the server..."
+ *   - If 4xx/5xx  use server-provided error, or generic fallback
  */
 export function classifyError(err) {
   // 1. Genuinely offline?
@@ -35,7 +58,7 @@ export function classifyError(err) {
       err?.message === "Network Error";
 
     if (isTimeout) {
-      return "The server is taking too long to respond. It may be starting up — please wait 30–50 seconds and try again.";
+      return "The server is taking too long to respond. It may be starting up - please wait 30–50 seconds and try again.";
     }
     return "Cannot reach the server. Please check your connection or try again in a moment.";
   }

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+﻿import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/client";
 import {
@@ -140,11 +140,11 @@ export default function ReportCorruption() {
               className="w-full"
               aria-live="polite"
             >
-              {copied ? "Copied ✓" : "Copy tracking code"}
+              {copied ? "Copied âœ“" : "Copy tracking code"}
             </Button>
             {success.hasEvidence && (
               <p className="text-xs text-emerald-700">
-                ✓ Evidence uploaded securely
+                âœ“ Evidence uploaded securely
               </p>
             )}
           </div>
@@ -220,7 +220,7 @@ export default function ReportCorruption() {
           name="description"
           value={form.description}
           onChange={update("description")}
-          placeholder="At around 10am on 14 March, at the district office in Mbarara…"
+          placeholder="At around 10am on 14 March, at the district office in Mbarara-¦"
           rows={5}
         />
       </Field>
@@ -326,7 +326,7 @@ export default function ReportCorruption() {
         loading={sending}
         className="w-full"
       >
-        {sending ? "Sending report…" : "Submit report"}
+        {sending ? "Sending report-¦" : "Submit report"}
       </Button>
 
       <p className="text-xs text-plu-slate text-center">
